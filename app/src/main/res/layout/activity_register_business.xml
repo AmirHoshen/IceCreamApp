@@ -103,7 +103,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBusinessEmailAddress"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintVertical_bias="0.064" />
 
     <EditText
         android:id="@+id/editTextBusinessPassword"
@@ -155,7 +155,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBusinessHeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/registerBusinessHeadline"
+        app:layout_constraintVertical_bias="0.428" />
 
     <TextView
         android:id="@+id/bannerRegBusiness"
