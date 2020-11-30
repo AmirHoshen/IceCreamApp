@@ -53,7 +53,7 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bannerRegCustomer:
-                startActivity(new Intent(this, MainActivityBusinessReg.class));
+                startActivity(new Intent(this, MainActivityUserReg.class));
                 break;
             case R.id.buttonRegNewCustomer:
                 registerUser();
