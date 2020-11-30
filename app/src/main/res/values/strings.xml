@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Welcome To GlidaLeeApp</string>
+    <string name="app_logo">GlidaLeeApp</string>
+    <string name="app_name_on_screen">Welcome To GlidaLee</string>
+    <string name="app_name_on_screen_business">Welcome To GlidaLee Business Department</string>
+
+
+    <string name="glidaLeeCustomerReg"><u>רישום משתמש חדש לגלידלי</u></string>
+    <string name="glidaLeeBusinessReg"><u>רישום בעל עסק חדש</u></string>
+    <string name="notYetAMember">הירשם כאן</string>
+    <string name="registerUser">צור משתמש</string>
+
+    <string name="userName"><u>Full Name</u></string>
+    <string name="phoneNumber"><u>Phone Number</u></string>
+
+
+    <string name="customer">לקוח</string>
+    <string name="business_owner">בעל עסק</string>
+    <string name="login">התחבר</string>
+    <string name="register">הירשם</string>
+    <string name="registerUserTxt">Users Registration Here</string>
+    <string name="registerBusinessTxt">Business Registration Here</string>
+
+    <string name="register_business">רישום עסק</string>
+    <string name="email_address"><u>Email Address</u></string>
+    <string name="password"><u>Password</u></string>
+    <string name="forgot_your_password">Forgot Password?</string>
+    <string name="businessName"><u>Business Name</u></string>
+    <string name="businessOwnerName"><u>Business Owner Full Name</u></string>
+    <string name="businessPhone"><u>Business Phone Number</u></string>
+    <string name="registerThisBusiness">רישום העסק</string>
+
+
+</resources>
