@@ -13,6 +13,8 @@
     <string name="userName"><u>Full Name</u></string>
     <string name="phoneNumber"><u>Phone Number</u></string>
 
+    <string name="ShoppingAreaText">ברוכים הבאים לעמוד הקניות!</string>
+    <string name="BusinessAreaText">ברוכים הבאים לעמוד המכירה של העסק!</string>
 
     <string name="customer">לקוח</string>
     <string name="business_owner">בעל עסק</string>
