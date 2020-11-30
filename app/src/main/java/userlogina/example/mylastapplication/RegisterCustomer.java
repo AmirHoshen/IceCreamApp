@@ -19,12 +19,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static userlogina.example.mylastapplication.MainActivityUserReg.progressBarUsr;
+
 public class RegisterCustomer extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private TextView banner, registerUser;
     private EditText editTextFullName, editTextEmail, editTextPhone, editTextPassword;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar2;
 
 
     @Override
@@ -45,8 +47,8 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
         editTextPhone = (EditText)findViewById(R.id.editTextPhoneRegCus);
         editTextPassword = (EditText)findViewById(R.id.editTextTextPasswordRegCus);
 
-        progressBar = (ProgressBar)findViewById(R.id.progressBar2);
-
+        progressBar2 = (ProgressBar)findViewById(R.id.progressBar2);
+        progressBarUsr.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -68,6 +70,7 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
         phone = editTextPhone.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
 
+        progressBar2.setVisibility(View.VISIBLE);
         if(fullName.isEmpty()){
             editTextFullName.setError("Full name is required!");
             editTextFullName.requestFocus();
@@ -99,7 +102,7 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar2.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -115,16 +118,17 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
 
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterCustomer.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
+                                progressBar2.setVisibility(View.GONE);
+                                finish();
                             }else{
                                 Toast.makeText(RegisterCustomer.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
+                                progressBar2.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else{
                     Toast.makeText(RegisterCustomer.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
+                    progressBar2.setVisibility(View.GONE);
                 }
             }
         });

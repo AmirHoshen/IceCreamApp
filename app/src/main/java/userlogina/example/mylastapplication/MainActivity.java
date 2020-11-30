@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
 
     Button customer, businessOwner;
+    public static ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         customer = findViewById(R.id.buttonCustomerMain);
         businessOwner = findViewById(R.id.buttonBusinessOwnMain);
+        progressBar = findViewById(R.id.progressBar);
 
         //main screen for customer
 
@@ -27,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //starts a new intent activity.
+                progressBar.setVisibility(View.VISIBLE);
                 openCustomerLoginActivity();
+
             }
         });
 
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openBusinessLoginActivity(){
+        progressBar.setVisibility(View.VISIBLE);
         startActivity(new Intent(MainActivity.this, MainActivityBusinessReg.class));
     }
 }

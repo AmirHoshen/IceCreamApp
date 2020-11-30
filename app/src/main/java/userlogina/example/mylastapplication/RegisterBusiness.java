@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static userlogina.example.mylastapplication.MainActivity.progressBar;
+import static userlogina.example.mylastapplication.MainActivityBusinessReg.progressBarBsns;
+
 public class RegisterBusiness extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
@@ -28,7 +31,7 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
 //    DatabaseReference myRef = database.getReference();
 
     private EditText editTextBusinessOwnFullName, editTextBusinessName,editTextEmail, editTextPhone, editTextPassword;
-    private ProgressBar progressBar;
+    public static ProgressBar progressBar3;
 
 
     @Override
@@ -49,8 +52,9 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
         editTextEmail = (EditText)findViewById(R.id.editTextBusinessEmailAddress);
         editTextPhone = (EditText)findViewById(R.id.editTextBusinessPhone);
         editTextPassword = (EditText)findViewById(R.id.editTextBusinessPassword);
-
-        progressBar = (ProgressBar)findViewById(R.id.progressBar3);
+        progressBar.setVisibility(View.INVISIBLE);
+        progressBarBsns.setVisibility(View.INVISIBLE);
+        progressBar3 = (ProgressBar)findViewById(R.id.progressBar3);
 
     }
 
@@ -109,7 +113,7 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar3.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -125,16 +129,17 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
 
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterBusiness.this, "Business owner has been registered successfully", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
+                                progressBar3.setVisibility(View.GONE);
+                                finish();
                             }else{
                                 Toast.makeText(RegisterBusiness.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
+                                progressBar3.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else{
                     Toast.makeText(RegisterBusiness.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
+                    progressBar3.setVisibility(View.GONE);
                 }
             }
         });
