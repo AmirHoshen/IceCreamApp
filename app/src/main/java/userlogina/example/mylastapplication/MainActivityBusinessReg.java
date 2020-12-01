@@ -17,7 +17,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
@@ -28,6 +33,7 @@ public class MainActivityBusinessReg extends AppCompatActivity {
     private TextView registerBusiness;
     private Button loginBtnBusiness;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseBusiness;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,8 @@ public class MainActivityBusinessReg extends AppCompatActivity {
         passwordBusiness = (EditText) findViewById(R.id.editTextNumberPassword);
         progressBarBsns = (ProgressBar) findViewById(R.id.progressBar1);
         registerBusiness = (TextView) findViewById(R.id.textViewRegisterBusinessMainRegBus);
-        loginBtnBusiness = (Button) findViewById(R.id.buttonLoginUserReg);
+        loginBtnBusiness = (Button) findViewById(R.id.buttonLoginBusinessReg);
+        databaseBusiness = FirebaseDatabase.getInstance().getReference().child("Business");
         progressBar.setVisibility(View.INVISIBLE);
         registerBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,21 +93,41 @@ public class MainActivityBusinessReg extends AppCompatActivity {
             passwordBusiness.requestFocus();
             return;
         }
-
         progressBarBsns.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        Query query = databaseBusiness.orderByChild("email").equalTo(email);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivityBusinessReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
-                    progressBarBsns.setVisibility(View.GONE);
-                    startActivity(new Intent(MainActivityBusinessReg.this, Business_Area.class));
-                } else {
-                    Toast.makeText(MainActivityBusinessReg.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {//problem no restriction of Business or Customer both login!
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(MainActivityBusinessReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
+                                progressBarBsns.setVisibility(View.GONE);
+                                startActivity(new Intent(MainActivityBusinessReg.this, ShoppingArea.class));
+                            } else {
+                                Toast.makeText(MainActivityBusinessReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                                progressBarBsns.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                }else {
+                    passwordBusiness.setText(null);
+                    Toast.makeText(MainActivityBusinessReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                     progressBarBsns.setVisibility(View.GONE);
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivityBusinessReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                progressBarBsns.setVisibility(View.GONE);
+                throw error.toException();
+            }
         });
+
+
     }
 
     @Override
