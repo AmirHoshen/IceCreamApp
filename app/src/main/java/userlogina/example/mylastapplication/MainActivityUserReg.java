@@ -17,9 +17,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
 public class MainActivityUserReg extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseCustomer;
     TextView registerNewUser;
     EditText editTextEmail, editTextPassword;
     Button loginUsr;
@@ -32,6 +41,8 @@ public class MainActivityUserReg extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        databaseCustomer = FirebaseDatabase.getInstance().getReference().child("Users");
+
         registerNewUser = (TextView) findViewById(R.id.textViewRegisterUser);
 
         editTextEmail = (EditText) findViewById(R.id.editTextTextEmailAddress);
@@ -41,6 +52,8 @@ public class MainActivityUserReg extends AppCompatActivity {
         loginUsr = (Button) findViewById(R.id.buttonLoginUserReg);
 
         progressBarUsr = (ProgressBar) findViewById(R.id.progressBar1);
+        progressBar.setVisibility(View.INVISIBLE);
+
 
         registerNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +65,9 @@ public class MainActivityUserReg extends AppCompatActivity {
         loginUsr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
                 progressBarUsr.setVisibility(View.VISIBLE);
+                login();
+
             }
         });
 
@@ -85,22 +99,40 @@ public class MainActivityUserReg extends AppCompatActivity {
             editTextPassword.requestFocus();
             return;
         }
-
         progressBarUsr.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {//problem no restriction of Business or Customer both login!
+        Query query = databaseCustomer.orderByChild("email").equalTo(email);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivityUserReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
-                    progressBarUsr.setVisibility(View.GONE);
-                    startActivity(new Intent(MainActivityUserReg.this, ShoppingArea.class));
-                } else {
-                    Toast.makeText(MainActivityUserReg.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {//problem no restriction of Business or Customer both login!
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(MainActivityUserReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
+                                progressBarUsr.setVisibility(View.GONE);
+                                startActivity(new Intent(MainActivityUserReg.this, ShoppingArea.class));
+                            } else {
+                                Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                                progressBarUsr.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                }else {
+                    editTextPassword.setText(null);
+                    Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                     progressBarUsr.setVisibility(View.GONE);
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                progressBarUsr.setVisibility(View.GONE);
+                throw error.toException();
+            }
         });
+
+
     }
-
-
 }
