@@ -91,7 +91,6 @@
         app:layout_constraintVertical_bias="0.061" />
 
     <TextView
-        android:id="@+id/textViewForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forgot_your_password"
@@ -116,7 +115,6 @@
         app:layout_constraintTop_toTopOf="@+id/editTextTextEmailAddress" />
 
     <TextView
-        android:id="@+id/textViewNotYetAMember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
