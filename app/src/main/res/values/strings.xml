@@ -27,5 +27,12 @@
     <string name="businessOwnerName"><u>Business Owner Full Name</u></string>
     <string name="businessPhone"><u>Business Phone Number</u></string>
     <string name="registerThisBusiness">רישום העסק</string>
+    <string name="title_activity_main_cust_land_page">MainActivityCustLandPage</string>
+    <string name="tab_text_OrderHistory">Order History</string>
+    <string name="tab_text_OrderNow">Order Now</string>
+    <string name="tab_text_profile">Profile</string>
+    <string name="title_activity_main_cus_land_page">MainActivityCusLandPage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
