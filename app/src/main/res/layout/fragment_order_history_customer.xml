@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderNowCustomerFragment">
+    android:background="#EC7979"
+    tools:context=".OrderHistoryFragmentCustomer">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#75DC1F"
-        android:text="@string/orderNow"
+        android:text="@string/orderHistory"
         android:textColor="#FFFFFF"
         android:textSize="40sp" />
 

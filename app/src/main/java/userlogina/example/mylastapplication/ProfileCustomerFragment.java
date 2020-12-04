@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ProfileCustomer extends Fragment {
+public class ProfileCustomerFragment extends Fragment {
 
 
-    public ProfileCustomer() {
+    public ProfileCustomerFragment() {
         // Required empty public constructor
     }
 

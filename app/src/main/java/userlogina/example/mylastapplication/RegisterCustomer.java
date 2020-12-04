@@ -119,7 +119,7 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterCustomer.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                 progressBar2.setVisibility(View.GONE);
-                                startActivity(new Intent(RegisterCustomer.this, MainActivityCustLandPage.class));
+                                startActivity(new Intent(RegisterCustomer.this, MainActivityCustomerLandPage.class));
                                 finish();
                             }else{
                                 Toast.makeText(RegisterCustomer.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();

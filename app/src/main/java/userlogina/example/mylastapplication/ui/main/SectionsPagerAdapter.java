@@ -17,7 +17,7 @@ import userlogina.example.mylastapplication.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_profile, R.string.tab_text_OrderNow, R.string.tab_text_OrderHistory};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {

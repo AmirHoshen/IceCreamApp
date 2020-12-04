@@ -21,6 +21,26 @@ public class MainActivityCustomerLandPage extends AppCompatActivity {
         TabItem tabOrderHistory = findViewById(R.id.tabOrderHistory);
         ViewPager viewPager = findViewById(R.id.viewPagerCustomer);
 
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+        viewPager.setAdapter(pagerAdapter);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 }

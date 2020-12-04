@@ -111,7 +111,7 @@ public class MainActivityUserReg extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(MainActivityUserReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
-                                startActivity(new Intent(MainActivityUserReg.this, MainActivityCusLandPage.class));
+                                startActivity(new Intent(MainActivityUserReg.this, MainActivityCustomerLandPage.class));
                             } else {
                                 Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
