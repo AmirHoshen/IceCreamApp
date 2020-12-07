@@ -36,5 +36,6 @@
     <string name="orderNow">Order Now</string>
     <string name="orderHistory">Order History</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="orderHistory">Orders history</string>
 
 </resources>
