@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,11 @@ public class ForgotPasswordPageActivity extends AppCompatActivity {
                 if(emailReset.isEmpty()) {
                     email.setError("Email is required!");
                     email.requestFocus();
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailReset).matches()) {
+                    email.setError("Please provide a valid email!");
+                    email.requestFocus();
+                    return;
                 }
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.sendPasswordResetEmail(emailReset)
