@@ -29,7 +29,7 @@ import static userlogina.example.mylastapplication.MainActivity.progressBar;
 public class MainActivityUserReg extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseCustomer;
-    TextView registerNewUser;
+    TextView registerNewUser, forgotPassword;
     EditText editTextEmail, editTextPassword;
     Button loginUsr;
     public static ProgressBar progressBarUsr;
@@ -45,11 +45,14 @@ public class MainActivityUserReg extends AppCompatActivity {
 
         registerNewUser = (TextView) findViewById(R.id.textViewRegisterUser);
 
+        forgotPassword =  (TextView) findViewById(R.id.forgotPasswordBtnUser);
+
         editTextEmail = (EditText) findViewById(R.id.editTextTextEmailAddress);
 
         editTextPassword = (EditText) findViewById(R.id.editTextNumberPassword);
 
         loginUsr = (Button) findViewById(R.id.buttonLoginUserReg);
+
 
         progressBarUsr = (ProgressBar) findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.INVISIBLE);
@@ -62,6 +65,15 @@ public class MainActivityUserReg extends AppCompatActivity {
                 startActivity(new Intent(MainActivityUserReg.this, RegisterCustomer.class));
             }
         });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                forgotPassword();
+            }
+        });
+
         loginUsr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +83,10 @@ public class MainActivityUserReg extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void forgotPassword() {
+        startActivity(new Intent(MainActivityUserReg.this, ForgotPasswordPageActivity.class));
     }
 
     private void login() {

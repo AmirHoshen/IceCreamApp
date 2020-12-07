@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLastApplication">
-        <activity android:name=".goldaActivityMenu"></activity>
+        <activity android:name=".BenJerryActivityMenu"></activity>
+        <activity android:name=".ForgotPasswordPageActivity" />
+        <activity android:name=".goldaActivityMenu" />
         <activity android:name=".MainActivityCustomerLandPage" />
         <activity android:name=".Business_Area" />
         <activity android:name=".MainActivityUserReg" />

@@ -20,6 +20,8 @@
     <string name="registerUserTxt">Users Registration Here</string>
     <string name="registerBusinessTxt">Business Registration Here</string>
 
+    <string name="ResetPasswordButton">Reset Password</string>
+
     <string name="email_address"><u>Email Address</u></string>
     <string name="password"><u>Password</u></string>
     <string name="forgot_your_password">Forgot Password?</string>

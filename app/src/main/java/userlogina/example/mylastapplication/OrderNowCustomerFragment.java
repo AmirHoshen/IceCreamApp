@@ -26,10 +26,19 @@ public class OrderNowCustomerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_order_now_customer, container, false);
 
         goldaBtn = (ImageButton) view.findViewById(R.id.goldaBtn);
+        bJBtn = (ImageButton) view.findViewById(R.id.benjerryBtn);
+
         goldaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), goldaActivityMenu.class));
+            }
+        });
+
+        bJBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), BenJerryActivityMenu.class));
             }
         });
 

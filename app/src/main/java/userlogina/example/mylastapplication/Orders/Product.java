@@ -2,7 +2,7 @@ package userlogina.example.mylastapplication.Orders;
 
 public class Product {
     public enum types{
-        Drinks, icecreame;
+         icecreame;
     }
     private String id="";
     private String name="";
