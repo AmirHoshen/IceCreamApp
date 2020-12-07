@@ -36,6 +36,14 @@
     <string name="orderNow">Order Now</string>
     <string name="orderHistory">Order History</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="orderHistory">Orders history</string>
+    <string name="doneDeals">עסקאות שבוצעו</string>
+    <string name="createMenu">יצירת תפריט</string>
+    <string name="fiveGram">גרם 500</string>
+    <string name="sevenGram">גרם 750</string>
+    <string name="kg">קילו</string>
+    <string name="addMenu">הוספת תפריט</string>
+    <string name="addDish">הוספת מנה</string>
+    <string name='watchMenus'>צפייה בתפריט</string>
+    <string name="quantity">כמות</string>
 
 </resources>

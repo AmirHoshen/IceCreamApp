@@ -28,7 +28,7 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth mAuth;
     private TextView banner, registerBusiness;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    DatabaseReference myRef = database.getReference();
+ //   DatabaseReference myRef = database.getReference();
 
     private EditText editTextBusinessOwnFullName, editTextBusinessName,editTextEmail, editTextPhone, editTextPassword;
     public static ProgressBar progressBar3;

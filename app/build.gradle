@@ -39,14 +39,13 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.android.material:material:1.2.0-alpha02'
-    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-database:19.5.1'
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.github.eddydn:AdvancedNestedScrollView:1.1'
+
 
 
 

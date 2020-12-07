@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLastApplication">
-        <activity android:name=".MainActivityCustomerLandPage"></activity>
+        <activity android:name=".goldaActivityMenu"></activity>
+        <activity android:name=".MainActivityCustomerLandPage" />
         <activity android:name=".Business_Area" />
         <activity android:name=".MainActivityUserReg" />
         <activity android:name=".RegisterBusiness" />
