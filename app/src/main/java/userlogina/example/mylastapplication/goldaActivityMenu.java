@@ -14,12 +14,12 @@ public class goldaActivityMenu extends AppCompatActivity {
     int images[] = {R.drawable.goldaloacker,
             R.drawable.goldacream,
             R.drawable.goldacoockiman,
-            R.drawable.goldachocolateKaramel,
+            R.drawable.goldachocolatekaramel,
             R.drawable.goldatropical,
-            R.drawable.goldasugarFree,
+            R.drawable.goldasugarfree,
             R.drawable.goldasorbe,
-            R.drawable.goldarekotMaskarpon,
-            R.drawable.goldaveganOreoMuss,
+            R.drawable.goldarekotmaskarpon,
+            R.drawable.goldaveganoreomuss,
             R.drawable.goldavegan};
 
     @Override
