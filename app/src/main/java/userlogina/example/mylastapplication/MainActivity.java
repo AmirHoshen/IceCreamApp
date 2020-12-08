@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //starts a new intent activity.
-                progressBar.setVisibility(View.VISIBLE);
+
                 openCustomerLoginActivity();
 
             }
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //starts a new intent activity.
+
                 openBusinessLoginActivity();
             }
         });
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openCustomerLoginActivity() {
+        progressBar.setVisibility(View.VISIBLE);
         startActivity(new Intent(MainActivity.this, MainActivityUserReg.class));
     }
 

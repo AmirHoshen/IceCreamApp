@@ -47,5 +47,60 @@
     <string name="addDish">הוספת מנה</string>
     <string name='watchMenus'>צפייה בתפריט</string>
     <string name="quantity">כמות</string>
+    
+    
+    <string-array name="golda_ice_cream_tastes">
+        <item>לואקר</item>
+        <item>שמנת</item>
+        <item>קוקימן</item>
+        <item>שוקולד שקדים וקרמל</item>
+        <item>טרופיקל</item>
+        <item>ללא סוכר</item>
+        <item>סורבה</item>
+        <item>מקרפונה ריקוטה</item>
+        <item>מוס אוריאו טבעוני</item>
+        <item>טבעוני</item>
+    </string-array>
+
+    <string-array name="golda_ice_cream_description">
+        <item>לואקר גלידת שמנת עם וופלים וקרם אגוזים</item>
+        <item>גלידת שמנת איכותית מכילה 7.8 אחוזי שומן</item>
+        <item>קוקימן גלידת שמנת עם שוקולד וחתיכות של מרנג</item>
+        <item>גלידת שמנת שוקולד קרמל וחתיכות שקדים</item>
+        <item>טרופיקל גלידת סורבה על בסיס פירות</item>
+        <item>גלידה ללא סוכר מכילה תחליף סוכר</item>
+        <item>גלידת סורבה על בסיס פירות מכילה 0 אחוזי שומן</item>
+        <item>גלידת שמנת וריקוטה מסקרפונה תותים</item>
+        <item>מוס אוריאו טבעוני</item>
+        <item>גלידות טבעוניות על בסיס חלב קוקוס סויה חמאת קקאו טחינה ועוד..</item>
+    </string-array>
+
+    <string-array name="ben_jerry_ice_cream_tastes">
+        <item>קינמון באנס</item>
+        <item>בראוניז שוקולד</item>
+        <item>בראוניז קרמל</item>
+        <item>בום צוקולטה</item>
+        <item>חמאת בוטנים ועוגיות טבעוני</item>
+        <item>קרמל סוטרה</item>
+        <item>פיש פוד</item>
+        <item>בצק עוגיות ושוקלד ציפס</item>
+        <item>Wake and no bake</item>
+        <item>סורבה תות</item>
+    </string-array>
+
+
+    <string-array name="ben_jerry_ice_cream_description">
+        <item>גלידת קרמל עם בצק קינמון ופירורי עוגיות קינמון</item>
+        <item>גלידת שוקולד עם חתיכות בראוניז</item>
+        <item>גלידת קרמל עם חתיכות בראוניז</item>
+        <item>גלידת קרמל וגלידת מוקה עם עוגיות חתיכות פאדג וליבת עוגיות שוקולד</item>
+        <item>חמאת בוטנים ועוגיות טבעוני</item>
+        <item>גלידת קרמל וגלידת שוקולד עם חתיכות פאדג וליבת קרמל</item>
+        <item>גלידת שמנת משובחת בטעם שוקולד חלב עם מרשמלו קרמל וחתיכות פאדג בצורת דג</item>
+        <item>גלידת עוגיות חלב עם חתיכות פאדג וליבת בצק עוגיות</item>
+        <item>גלידת וניל עם עוגיות חמאת בוטנים וגלידת חמאת בוטנים עם חתיכות פאדג וליבת בצק עוגיות לא אפוי</item>
+        <item>סורבה תות</item>
+    </string-array>
+
 
 </resources>
