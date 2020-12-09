@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static userlogina.example.mylastapplication.MainActivityUserReg.progressBarUsr;
@@ -117,6 +119,18 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
                         public void onComplete(@NonNull Task<Void> task) {
 
                             if(task.isSuccessful()){
+                                FirebaseUser _user = FirebaseAuth.getInstance().getCurrentUser();
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(fullName).build();
+
+                                _user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            
+                                        }
+                                    }
+                                });
                                 Toast.makeText(RegisterCustomer.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                 progressBar2.setVisibility(View.GONE);
                                 startActivity(new Intent(RegisterCustomer.this, MainActivityCustomerLandPage.class));
