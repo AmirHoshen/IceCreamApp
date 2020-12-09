@@ -53,7 +53,7 @@ public class MainActivityBusinessReg extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null){
             if(user.getUid().equals("sYIsZ3lypWPUvha61jTuJ2KTNzV2") || user.getUid().equals("sYIsZ33ypWPUvha61jTuJ2KTNzV2"))
-                startActivity(new Intent(MainActivityBusinessReg.this, Business_Area.class));}
+                startActivity(new Intent(MainActivityBusinessReg.this, BusinessArea.class));}
 
         registerBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +125,7 @@ public class MainActivityBusinessReg extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(MainActivityBusinessReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
                                 progressBarBsns.setVisibility(View.GONE);
-                                startActivity(new Intent(MainActivityBusinessReg.this, Business_Area.class));
+                                startActivity(new Intent(MainActivityBusinessReg.this, BusinessArea.class));
                             } else {
                                 Toast.makeText(MainActivityBusinessReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                                 progressBarBsns.setVisibility(View.GONE);

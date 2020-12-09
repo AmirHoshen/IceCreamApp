@@ -2,7 +2,6 @@ package userlogina.example.mylastapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.LauncherActivityInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivityBenjerryOrder.class);
+                Intent intent = new Intent(context, MainActivityOrder.class);
                 intent.putExtra("data1", data1[position]);
                 intent.putExtra("data2", data2[position]);
                 intent.putExtra("myImage", images[position]);

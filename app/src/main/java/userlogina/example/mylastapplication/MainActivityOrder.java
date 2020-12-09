@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivityBenjerryOrder extends AppCompatActivity {
+public class MainActivityOrder extends AppCompatActivity {
 
 
     ImageView mainImageView;
@@ -19,7 +19,7 @@ public class MainActivityBenjerryOrder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_benjerry_order);
+        setContentView(R.layout.activity_main_order);
 
         mainImageView = findViewById(R.id.imageViewBJOrder);
         title = findViewById(R.id.title);
@@ -35,7 +35,7 @@ public class MainActivityBenjerryOrder extends AppCompatActivity {
             data2 = getIntent().getStringExtra(data2);
             myImage = getIntent().getIntExtra("myImage", 1);
         }else{
-            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Data you need to contact programmers dept.", Toast.LENGTH_SHORT).show();
         }
     }
 
