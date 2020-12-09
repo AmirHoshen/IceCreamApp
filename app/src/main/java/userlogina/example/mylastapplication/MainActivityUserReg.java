@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +46,7 @@ public class MainActivityUserReg extends AppCompatActivity {
 
         registerNewUser = (TextView) findViewById(R.id.textViewRegisterUser);
 
-        forgotPassword =  (TextView) findViewById(R.id.forgotPasswordBtnUser);
+        forgotPassword = (TextView) findViewById(R.id.forgotPasswordBtnUser);
 
         editTextEmail = (EditText) findViewById(R.id.editTextTextEmailAddress);
 
@@ -57,31 +58,36 @@ public class MainActivityUserReg extends AppCompatActivity {
         progressBarUsr = (ProgressBar) findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.INVISIBLE);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null)
+            if(user.getUid().equals(FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).getRef().getKey())){
+                startActivity(new Intent(MainActivityUserReg.this, MainActivityCustomerLandPage.class));}
 
-        registerNewUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBarUsr.setVisibility(View.VISIBLE);
-                startActivity(new Intent(MainActivityUserReg.this, RegisterCustomer.class));
-            }
-        });
+            registerNewUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressBarUsr.setVisibility(View.VISIBLE);
+                    startActivity(new Intent(MainActivityUserReg.this, RegisterCustomer.class));
+                }
+            });
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                forgotPassword();
-            }
-        });
+            forgotPassword.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    forgotPassword();
+                }
+            });
 
-        loginUsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBarUsr.setVisibility(View.VISIBLE);
-                login();
+            loginUsr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressBarUsr.setVisibility(View.VISIBLE);
+                    login();
 
-            }
-        });
+                }
+            });
+
 
     }
 
