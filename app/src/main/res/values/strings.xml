@@ -19,7 +19,7 @@
     <string name="login">התחבר</string>
     <string name="registerUserTxt">Users Registration Here</string>
     <string name="registerBusinessTxt">Business Registration Here</string>
-
+    <string name="TextView">TextView</string>
     <string name="ResetPasswordButton">Reset Password</string>
     <string name="SignOut">Sign Out</string>
     <string name="email_address"><u>Email Address</u></string>
