@@ -1,6 +1,7 @@
 package userlogina.example.mylastapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.LauncherActivityInfo;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>{
@@ -18,12 +20,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     int images[];
     Context context;
 
-   public RecyclerViewAdapter(Context ct, String s1[], String s2[], int img[]){
-       context = ct;
-       data1 = s1;
-       data2 = s2;
-       images = img;
-   }
+    public RecyclerViewAdapter(Context ct, String s1[], String s2[], int img[]){
+        context = ct;
+        data1 = s1;
+        data2 = s2;
+        images = img;
+    }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,6 +40,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.iceCreamTastes.setText(data1[position]);
         holder.iceCreamDescription.setText(data2[position]);
         holder.myImageView.setImageResource(images[position]);
+
+        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivityBenjerryOrder.class);
+                intent.putExtra("data1", data1[position]);
+                intent.putExtra("data2", data2[position]);
+                intent.putExtra("myImage", images[position]);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -47,8 +60,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-       TextView iceCreamTastes, iceCreamDescription;
-       ImageView myImageView;
+        TextView iceCreamTastes, iceCreamDescription;
+        ImageView myImageView;
+        ConstraintLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +70,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             iceCreamTastes = itemView.findViewById(R.id.iceCreamTastes);
             iceCreamDescription = itemView.findViewById(R.id.iceCreamDescription);
             myImageView = itemView.findViewById(R.id.myImageView);
+            mainLayout = itemView.findViewById(R.id.mainLayout);
+
         }
     }
 }
