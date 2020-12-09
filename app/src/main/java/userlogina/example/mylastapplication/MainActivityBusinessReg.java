@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,6 +49,12 @@ public class MainActivityBusinessReg extends AppCompatActivity {
         loginBtnBusiness = (Button) findViewById(R.id.buttonLoginBusinessReg);
         databaseBusiness = FirebaseDatabase.getInstance().getReference().child("Business");
         progressBar.setVisibility(View.INVISIBLE);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            if(user.getUid().equals("sYIsZ3lypWPUvha61jTuJ2KTNzV2") || user.getUid().equals("sYIsZ33ypWPUvha61jTuJ2KTNzV2"))
+                startActivity(new Intent(MainActivityBusinessReg.this, Business_Area.class));}
+
         registerBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +81,7 @@ public class MainActivityBusinessReg extends AppCompatActivity {
             }
         });
     }
+
 
     private void forgotPassword() {
         startActivity(new Intent(this, ForgotPasswordPageActivity.class));
@@ -141,6 +149,8 @@ public class MainActivityBusinessReg extends AppCompatActivity {
 
 
     }
+
+
 
     @Override
     protected void onStart() {
