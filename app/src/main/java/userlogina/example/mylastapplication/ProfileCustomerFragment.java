@@ -42,7 +42,6 @@ public class ProfileCustomerFragment extends Fragment {
             }
         });
         String _user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        System.out.println(_user);
         name.setText("Welcome "+_user);
 
         // Inflate the layout for this fragment
