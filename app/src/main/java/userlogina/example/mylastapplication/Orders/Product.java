@@ -7,7 +7,7 @@ public class Product {
     private String id="";
     private String name="";
     private double price;
-    private int count;
+    private int amount;
     private types type;
 
     public Product(){
@@ -17,7 +17,7 @@ public class Product {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.count = stocks;
+        this.amount = stocks;
         this.type=type;
     }
 
@@ -45,12 +45,12 @@ public class Product {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public String toString(){

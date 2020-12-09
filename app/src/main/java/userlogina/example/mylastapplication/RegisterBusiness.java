@@ -2,6 +2,8 @@ package userlogina.example.mylastapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import userlogina.example.mylastapplication.Orders.Dish;
+import userlogina.example.mylastapplication.Orders.Order;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 import static userlogina.example.mylastapplication.MainActivityBusinessReg.progressBarBsns;
@@ -28,7 +32,7 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth mAuth;
     private TextView banner, registerBusiness;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
- //   DatabaseReference myRef = database.getReference();
+    //   DatabaseReference myRef = database.getReference();
 
     private EditText editTextBusinessOwnFullName, editTextBusinessName,editTextEmail, editTextPhone, editTextPassword;
     public static ProgressBar progressBar3;
@@ -77,6 +81,12 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
         email =  editTextEmail.getText().toString().trim();
         phone = editTextPhone.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
+        ArrayList<Order> orders = new ArrayList<Order>();
+        ArrayList<Dish> order = new ArrayList<Dish>();
+        order.add(new Dish("vanila","Tasty Shit",2,1));
+        order.add(new Dish("caramel","Goodies",15,2));
+        orders.add(new Order("1",businessName,"0000000000","makom 22/2", order,32.0,"ok","08/12/2020 21:42:01"));
+
 
         if(businessOwnerFullName.isEmpty()){
             editTextBusinessOwnFullName.setError("Full name is required!");
@@ -118,7 +128,7 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Business b = new Business(businessOwnerFullName, businessName,email, phone, password);
+                    Business b = new Business(businessOwnerFullName, businessName, email, phone, password,orders);
 
                     //return the id for the registered user
                     FirebaseDatabase.getInstance().getReference("Business")
