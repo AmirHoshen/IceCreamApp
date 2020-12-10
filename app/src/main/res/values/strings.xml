@@ -102,5 +102,7 @@
         <item>סורבה תות</item>
     </string-array>
 
+    <string name="addToCart">הוסף מוצר לעגלת הקניות</string>
+
 
 </resources>

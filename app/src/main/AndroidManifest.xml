@@ -9,13 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLastApplication">
-        <activity android:name=".SecondActivityOrder"
-            android:parentActivityName=".MainActivityOrder"
-            android:label="Details"></activity>
-        <activity android:name=".MainActivityOrder" />
+        <activity android:name=".SecondActivityOrderGolda"
+            android:label="DetailsGolda"
+            android:parentActivityName=".GoldaActivityMenu"/>
+        <activity
+            android:name=".SecondActivityOrderBenAndJerry"
+            android:label="DetailsBJ"
+            android:parentActivityName=".BenJerryActivityMenu" />
         <activity android:name=".BenJerryActivityMenu" />
         <activity android:name=".ForgotPasswordPageActivity" />
-        <activity android:name=".goldaActivityMenu" />
+        <activity android:name=".GoldaActivityMenu" />
         <activity android:name=".MainActivityCustomerLandPage" />
         <activity android:name=".BusinessArea" />
         <activity android:name=".MainActivityUserReg" />

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-public class goldaActivityMenu extends AppCompatActivity {
+public class GoldaActivityMenu extends AppCompatActivity {
 
     RecyclerView goldaRecyclerView;
 

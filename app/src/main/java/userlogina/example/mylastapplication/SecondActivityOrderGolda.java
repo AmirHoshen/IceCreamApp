@@ -7,7 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SecondActivityOrder extends AppCompatActivity {
+public class SecondActivityOrderGolda extends AppCompatActivity {
+
 
     ImageView mainImageView;
     TextView title, description;
@@ -18,7 +19,7 @@ public class SecondActivityOrder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second_order);
+        setContentView(R.layout.activity_second_order_benjerry);
 
 
         mainImageView = findViewById(R.id.mainImageView);
