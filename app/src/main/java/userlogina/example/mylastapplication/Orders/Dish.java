@@ -17,6 +17,12 @@ public class Dish {
         this.amount = amount;
     }
 
+    public Dish(String falvor, String description, double price) {
+        this.falvor = falvor;
+        this.description = description;
+        this.price = price;
+    }
+
     public String getFalvor() {
         return falvor;
     }

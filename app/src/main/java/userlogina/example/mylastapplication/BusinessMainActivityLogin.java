@@ -48,7 +48,7 @@ public class BusinessMainActivityLogin extends AppCompatActivity {
         forgotPasswordBtn = (TextView) findViewById(R.id.forgorPasswordBtnBus);
         loginBtnBusiness = (Button) findViewById(R.id.buttonLoginBusinessReg);
         databaseBusiness = FirebaseDatabase.getInstance().getReference().child("Business");
-        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar.setVisibility(View.INVISIBLE);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null){
@@ -156,6 +156,12 @@ public class BusinessMainActivityLogin extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            //check if user that logged in is authorized
+
+
+        }
+
         //if this business owner is already registered to system catch him.
         //updateUI(currentUser);
         progressBar.setVisibility(View.INVISIBLE);

@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,7 +36,7 @@ public class UserRegister extends AppCompatActivity implements View.OnClickListe
 
     private Button registerUserBtn;
 
-    private static final String USER = "user";
+    private static final String USER = "Users";
     private static final String TAG = "RegistrationActivity";
 
     private User user;
@@ -117,13 +118,13 @@ public class UserRegister extends AppCompatActivity implements View.OnClickListe
 
                 user = new User(fullName, email, phone, password);
 
-                registerUser(email, password);
+                registerUser(email, password, fullName);
 
             }
         });
     }
 
-    private void registerUser(String email, String password) {
+    private void registerUser(String email, String password, String fullName) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -132,6 +133,19 @@ public class UserRegister extends AppCompatActivity implements View.OnClickListe
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(fullName).build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("User-Reg", "User profile updated.");
+                                            }
+                                        }
+                                    });
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

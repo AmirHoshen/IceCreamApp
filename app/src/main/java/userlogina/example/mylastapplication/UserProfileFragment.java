@@ -29,7 +29,6 @@ public class UserProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
-        name = (TextView) view.findViewById(R.id.NameTag);
         signOut = (Button) view.findViewById(R.id.SignOutButtonUser);
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,11 +38,17 @@ public class UserProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
-        String _user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        name.setText("Welcome "+_user);
 
         // Inflate the layout for this fragment
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        name = (TextView) view.findViewById(R.id.NameTag);
+        String _user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        name.setText("Welcome "+_user);
+
+    }
 }

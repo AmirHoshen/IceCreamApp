@@ -2,6 +2,7 @@ package userlogina.example.mylastapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,13 +31,13 @@ public class BusinessAreaActivity extends AppCompatActivity {
 
         pastOrderBtn = findViewById(R.id.doneDealsBtn);
         watchMenuBtn = findViewById(R.id.watchMenuBtn);
-        addDishBtn = findViewById(R.id.addDishBtn);
+        addDishBtn = findViewById(R.id.addMenuBtn);
 
 
         pastOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
+
 
             }
         });
@@ -51,8 +52,7 @@ public class BusinessAreaActivity extends AppCompatActivity {
         addDishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                startActivity(new Intent(BusinessAreaActivity.this,AddDishBussActivity.class));
             }
         });
     }

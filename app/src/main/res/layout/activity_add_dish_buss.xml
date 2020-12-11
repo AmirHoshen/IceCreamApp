@@ -14,8 +14,8 @@
         android:layout_marginEnd="34dp"
         android:layout_marginRight="34dp"
         android:ems="10"
+        android:hint="@string/dishname"
         android:inputType="textPersonName"
-        android:text="@string/dishname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,8 +27,8 @@
         android:layout_marginEnd="31dp"
         android:layout_marginRight="31dp"
         android:ems="10"
+        android:hint="@string/dishprice"
         android:inputType="textPersonName"
-        android:text="@string/dishprice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dishNameEditTxtView" />
 
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dishPriceEditTxtView" />
 
     <Button
-        android:id="@+id/addDishBtn"
+        android:id="@+id/addDishButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

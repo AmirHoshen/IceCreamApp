@@ -7,6 +7,7 @@ import userlogina.example.mylastapplication.Orders.Order;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -81,10 +84,6 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
         phone = editTextPhone.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
         ArrayList<Order> orders = new ArrayList<Order>();
-        ArrayList<Dish> order = new ArrayList<Dish>();
-        order.add(new Dish("vanila","Tasty Shit",2,1));
-        order.add(new Dish("caramel","Goodies",15,2));
-        orders.add(new Order("1",businessName,"0000000000","makom 22/2", order,32.0,"ok","08/12/2020 21:42:01"));
 
 
         if(businessOwnerFullName.isEmpty()){
@@ -137,6 +136,20 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
                         public void onComplete(@NonNull Task<Void> task) {
 
                             if(task.isSuccessful()){
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(businessOwnerFullName).build();
+
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d("Business-Reg", "User profile updated.");
+                                                }
+                                            }
+                                        });
                                 Toast.makeText(BusinessRegister.this, "Business owner has been registered successfully", Toast.LENGTH_LONG).show();
                                 progressBar3.setVisibility(View.GONE);
                                 finish();

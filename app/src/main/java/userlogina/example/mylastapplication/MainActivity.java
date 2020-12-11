@@ -8,10 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
 
     Button customer, businessOwner;
     public static ProgressBar progressBar;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //starts a new intent activity.
-
+                progressBar.setVisibility(View.VISIBLE);
                 openCustomerLoginActivity();
 
             }
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //starts a new intent activity.
-
+                progressBar.setVisibility(View.VISIBLE);
                 openBusinessLoginActivity();
             }
         });
@@ -48,12 +53,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openCustomerLoginActivity() {
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         startActivity(new Intent(MainActivity.this, UserMainActivityLogin.class));
     }
 
     private void openBusinessLoginActivity(){
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         startActivity(new Intent(MainActivity.this, BusinessMainActivityLogin.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //happens if the customer gets back to main menu so it will sign out and will have to start all over again
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null)
+            FirebaseAuth.getInstance().signOut();
     }
 }

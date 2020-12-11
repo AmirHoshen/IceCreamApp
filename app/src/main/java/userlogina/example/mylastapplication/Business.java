@@ -3,12 +3,14 @@ package userlogina.example.mylastapplication;
 
 import java.util.ArrayList;
 
+import userlogina.example.mylastapplication.Orders.Dish;
 import userlogina.example.mylastapplication.Orders.Order;
 
 public class Business {
 
     String businessOwnerName, businessName, email, phone , password;
     ArrayList<Order> Orders;
+    ArrayList<Dish> Dishes;
 
     public Business(){}
 
@@ -19,6 +21,16 @@ public class Business {
         this.phone = phone;
         this.password = password;
         this.Orders = orders;
+    }
+
+    public Business(String businessOwnerName, String businessName, String email, String phone, String password) {
+        this.businessOwnerName = businessOwnerName;
+        this.businessName = businessName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.Orders = new ArrayList<>();
+        this.Dishes = new ArrayList<>();
     }
 
     public String getBusinessOwnerName() {
@@ -67,5 +79,13 @@ public class Business {
 
     public void setOrders(ArrayList<Order> orders) {
         Orders = orders;
+    }
+
+    public ArrayList<Dish> getDishes() {
+        return Dishes;
+    }
+
+    public void setDishes(ArrayList<Dish> dishes) {
+        Dishes = dishes;
     }
 }
