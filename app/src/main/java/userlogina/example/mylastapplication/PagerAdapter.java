@@ -2,7 +2,6 @@ package userlogina.example.mylastapplication;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
@@ -19,11 +18,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-              return new ProfileCustomerFragment();
+              return new UserProfileFragment();
             case 1:
-                return new OrderNowCustomerFragment();
+                return new UserOrderNowFragment();
             case 2:
-                return new OrderHistoryFragmentCustomer();
+                return new UserOrderHistoryFragment();
             default:
                 return null;
         }

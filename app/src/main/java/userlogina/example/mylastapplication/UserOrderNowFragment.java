@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-public class OrderNowCustomerFragment extends Fragment {
+public class UserOrderNowFragment extends Fragment {
 
     private ImageButton bJBtn, goldaBtn;
 
-    public OrderNowCustomerFragment() {
+    public UserOrderNowFragment() {
         // Required empty public constructor
     }
 

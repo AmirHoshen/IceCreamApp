@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
-public class MainActivityBusinessLogin extends AppCompatActivity {
+public class BusinessMainActivityLogin extends AppCompatActivity {
 
     private EditText emailBusiness, passwordBusiness;
     public static ProgressBar progressBarBsns;
@@ -53,7 +53,7 @@ public class MainActivityBusinessLogin extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null){
             if(user.getUid().equals("sYIsZ3lypWPUvha61jTuJ2KTNzV2") || user.getUid().equals("sYIsZ33ypWPUvha61jTuJ2KTNzV2"))
-                startActivity(new Intent(MainActivityBusinessLogin.this, BusinessArea.class));}
+                startActivity(new Intent(BusinessMainActivityLogin.this, BusinessAreaActivity.class));}
 
         registerBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class MainActivityBusinessLogin extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.textViewRegisterBusinessMainRegBus:
                         progressBarBsns.setVisibility(View.VISIBLE);
-                        startActivity(new Intent(MainActivityBusinessLogin.this, RegisterBusiness.class));
+                        startActivity(new Intent(BusinessMainActivityLogin.this, BusinessRegister.class));
                         break;
                 }
             }
@@ -123,25 +123,25 @@ public class MainActivityBusinessLogin extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivityBusinessLogin.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BusinessMainActivityLogin.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
                                 progressBarBsns.setVisibility(View.GONE);
-                                startActivity(new Intent(MainActivityBusinessLogin.this, BusinessArea.class));
+                                startActivity(new Intent(BusinessMainActivityLogin.this, BusinessAreaActivity.class));
                             } else {
-                                Toast.makeText(MainActivityBusinessLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BusinessMainActivityLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                                 progressBarBsns.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else {
                     passwordBusiness.setText(null);
-                    Toast.makeText(MainActivityBusinessLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BusinessMainActivityLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                     progressBarBsns.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivityBusinessLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                Toast.makeText(BusinessMainActivityLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                 progressBarBsns.setVisibility(View.GONE);
                 throw error.toException();
             }

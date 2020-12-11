@@ -14,14 +14,14 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ProfileCustomerFragment extends Fragment {
+public class UserProfileFragment extends Fragment {
 
     private TextView name;
     private Button signOut;
     Context context;
     View view;
 
-    public ProfileCustomerFragment() {
+    public UserProfileFragment() {
         // Required empty public constructor
     }
 

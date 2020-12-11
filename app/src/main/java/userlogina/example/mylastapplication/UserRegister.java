@@ -19,13 +19,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static userlogina.example.mylastapplication.MainActivityUserLogin.progressBarUsr;
+import static userlogina.example.mylastapplication.UserMainActivityLogin.progressBarUsr;
 
-public class RegisterCustomer extends AppCompatActivity implements View.OnClickListener {
+public class UserRegister extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
@@ -137,7 +136,7 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterCustomer.this, "Authentication failed.",
+                            Toast.makeText(UserRegister.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
                         }
@@ -152,7 +151,7 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
         //insert user information to firebase
         String keyID = mDatabase.push().getKey();
         mDatabase.child(keyID).setValue(user);
-        Intent loginIntent = new Intent(this, MainActivityUserLogin.class);
+        Intent loginIntent = new Intent(this, UserMainActivityLogin.class);
         startActivity(loginIntent);
 
     }

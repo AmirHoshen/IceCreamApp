@@ -24,9 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
-import static userlogina.example.mylastapplication.MainActivityBusinessLogin.progressBarBsns;
+import static userlogina.example.mylastapplication.BusinessMainActivityLogin.progressBarBsns;
 
-public class RegisterBusiness extends AppCompatActivity implements View.OnClickListener {
+public class BusinessRegister extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private TextView banner, registerBusiness;
@@ -65,7 +65,7 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bannerRegBusiness:
-                startActivity(new Intent(this, MainActivityUserLogin.class));
+                startActivity(new Intent(this, UserMainActivityLogin.class));
                 break;
             case R.id.buttonRegNewBusiness:
                 registerUser();
@@ -137,17 +137,17 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
                         public void onComplete(@NonNull Task<Void> task) {
 
                             if(task.isSuccessful()){
-                                Toast.makeText(RegisterBusiness.this, "Business owner has been registered successfully", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BusinessRegister.this, "Business owner has been registered successfully", Toast.LENGTH_LONG).show();
                                 progressBar3.setVisibility(View.GONE);
                                 finish();
                             }else{
-                                Toast.makeText(RegisterBusiness.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BusinessRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                                 progressBar3.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(RegisterBusiness.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BusinessRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                     progressBar3.setVisibility(View.GONE);
                 }
             }

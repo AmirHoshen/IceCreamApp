@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivityCustomerLandPage extends AppCompatActivity {
+public class UserMainActivityLandPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

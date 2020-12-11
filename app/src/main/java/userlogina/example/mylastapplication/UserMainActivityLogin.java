@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
-public class MainActivityUserLogin extends AppCompatActivity {
+public class UserMainActivityLogin extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseCustomer;
@@ -62,13 +62,13 @@ public class MainActivityUserLogin extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)
             if(user.getUid().equals(FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).getRef().getKey())){
-                startActivity(new Intent(MainActivityUserLogin.this, MainActivityCustomerLandPage.class));}
+                startActivity(new Intent(UserMainActivityLogin.this, UserMainActivityLandPage.class));}
 
             registerNewUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     progressBarUsr.setVisibility(View.VISIBLE);
-                    startActivity(new Intent(MainActivityUserLogin.this, RegisterCustomer.class));
+                    startActivity(new Intent(UserMainActivityLogin.this, UserRegister.class));
                 }
             });
 
@@ -105,7 +105,7 @@ public class MainActivityUserLogin extends AppCompatActivity {
     }
 
     private void forgotPassword() {
-        startActivity(new Intent(MainActivityUserLogin.this, ForgotPasswordPageActivity.class));
+        startActivity(new Intent(UserMainActivityLogin.this, ForgotPasswordPageActivity.class));
     }
 
     private void login() {
@@ -144,25 +144,25 @@ public class MainActivityUserLogin extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivityUserLogin.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserMainActivityLogin.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
-                                startActivity(new Intent(MainActivityUserLogin.this, MainActivityCustomerLandPage.class));
+                                startActivity(new Intent(UserMainActivityLogin.this, UserMainActivityLandPage.class));
                             } else {
-                                Toast.makeText(MainActivityUserLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserMainActivityLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else {
                     editTextPassword.setText(null);
-                    Toast.makeText(MainActivityUserLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserMainActivityLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                     progressBarUsr.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivityUserLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserMainActivityLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                 progressBarUsr.setVisibility(View.GONE);
                 throw error.toException();
             }
