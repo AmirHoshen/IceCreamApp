@@ -47,6 +47,7 @@
     <string name="addDish">הוספת מנה</string>
     <string name='watchMenus'>צפייה בתפריט</string>
     <string name="quantity">כמות</string>
+    <string name="userProfile">פרופיל משתמש</string>
 
 
     <string-array name="golda_ice_cream_tastes">

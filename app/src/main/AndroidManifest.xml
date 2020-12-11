@@ -21,10 +21,10 @@
         <activity android:name=".GoldaActivityMenu" />
         <activity android:name=".MainActivityCustomerLandPage" />
         <activity android:name=".BusinessArea" />
-        <activity android:name=".MainActivityUserReg" />
+        <activity android:name=".MainActivityUserLogin" />
         <activity android:name=".RegisterBusiness" />
         <activity android:name=".RegisterCustomer" />
-        <activity android:name=".MainActivityBusinessReg" />
+        <activity android:name=".MainActivityBusinessLogin" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -22,10 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
-import static userlogina.example.mylastapplication.MainActivityBusinessReg.progressBarBsns;
+import static userlogina.example.mylastapplication.MainActivityBusinessLogin.progressBarBsns;
 
 public class RegisterBusiness extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,7 +65,7 @@ public class RegisterBusiness extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bannerRegBusiness:
-                startActivity(new Intent(this, MainActivityUserReg.class));
+                startActivity(new Intent(this, MainActivityUserLogin.class));
                 break;
             case R.id.buttonRegNewBusiness:
                 registerUser();
