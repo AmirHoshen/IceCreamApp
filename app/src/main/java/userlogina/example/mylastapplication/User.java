@@ -1,7 +1,7 @@
 package userlogina.example.mylastapplication;
 
 public class User {
-    private String fullName, email, phone , password;
+    public String fullName, email, phone , password;
 
     public User(){}
 

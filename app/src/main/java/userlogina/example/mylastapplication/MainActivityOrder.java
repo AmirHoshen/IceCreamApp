@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SecondActivityOrderGolda extends AppCompatActivity {
+public class MainActivityOrder extends AppCompatActivity {
 
 
     ImageView mainImageView;
@@ -19,27 +19,23 @@ public class SecondActivityOrderGolda extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second_order_benjerry);
+        setContentView(R.layout.activity_main_order);
 
-
-        mainImageView = findViewById(R.id.mainImageView);
-        title = findViewById(R.id.orderTitle);
-        description = findViewById(R.id.orderDescription);
+        mainImageView = findViewById(R.id.imageViewBJOrder);
+        title = findViewById(R.id.title);
+        description = findViewById(R.id.description);
 
         getData();
         setData();
-
     }
 
     private void getData(){
         if(getIntent().hasExtra("myImage") && getIntent().hasExtra("data1") && getIntent().hasExtra("data2")){
-
-            data1 = getIntent().getStringExtra("data1");
-            data2 = getIntent().getStringExtra("data2");
-            myImage = getIntent().getIntExtra("myImage",1);
-
+            data1 = getIntent().getStringExtra(data1);
+            data2 = getIntent().getStringExtra(data2);
+            myImage = getIntent().getIntExtra("myImage", 1);
         }else{
-            Toast.makeText(this, "No Data, please contact support",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Data you need to contact programmers dept.", Toast.LENGTH_SHORT).show();
         }
     }
 
