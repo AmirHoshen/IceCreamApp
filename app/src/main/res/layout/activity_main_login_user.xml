@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".MainActivityBusinessReg">
+    tools:context=".MainActivityUserLogin">
 
     <TextView
         android:id="@+id/txtViewLogoMain1"
@@ -71,7 +71,7 @@
         app:layout_constraintVertical_bias="0.056" />
 
     <Button
-        android:id="@+id/buttonLoginBusinessReg"
+        android:id="@+id/buttonLoginUserReg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -91,18 +91,17 @@
         app:layout_constraintVertical_bias="0.061" />
 
     <TextView
-        android:id="@+id/forgorPasswordBtnBus"
+        android:id="@+id/forgotPasswordBtnUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
         android:text="@string/forgot_your_password"
         android:textColor="#B21DE9B6"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLoginBusinessReg"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginUserReg"
         app:layout_constraintVertical_bias="0.08" />
 
     <ProgressBar
@@ -126,17 +125,18 @@
         app:layout_constraintVertical_bias="0.185" />
 
     <TextView
-        android:id="@+id/textViewRegisterBusinessMainRegBus"
+        android:id="@+id/textViewRegisterUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/registerBusinessTxt"
+        android:text="@string/registerUserTxt"
         android:textColor="@color/teal_200"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLoginBusinessReg"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintVertical_bias="0.696" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,7 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
-public class MainActivityUserReg extends AppCompatActivity {
+public class MainActivityUserLogin extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
     private DatabaseReference databaseCustomer;
     TextView registerNewUser, forgotPassword;
@@ -38,7 +39,7 @@ public class MainActivityUserReg extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_reg_user);
+        setContentView(R.layout.activity_main_login_user);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -61,13 +62,13 @@ public class MainActivityUserReg extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)
             if(user.getUid().equals(FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).getRef().getKey())){
-                startActivity(new Intent(MainActivityUserReg.this, MainActivityCustomerLandPage.class));}
+                startActivity(new Intent(MainActivityUserLogin.this, MainActivityCustomerLandPage.class));}
 
             registerNewUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     progressBarUsr.setVisibility(View.VISIBLE);
-                    startActivity(new Intent(MainActivityUserReg.this, RegisterCustomer.class));
+                    startActivity(new Intent(MainActivityUserLogin.this, RegisterCustomer.class));
                 }
             });
 
@@ -90,9 +91,21 @@ public class MainActivityUserReg extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //if user is already created this code section catch him
+        updateUI(currentUser);
+
+    }
+
+    //NEED-TO-DO
+    private void updateUI(FirebaseUser currentUser) {
+    }
 
     private void forgotPassword() {
-        startActivity(new Intent(MainActivityUserReg.this, ForgotPasswordPageActivity.class));
+        startActivity(new Intent(MainActivityUserLogin.this, ForgotPasswordPageActivity.class));
     }
 
     private void login() {
@@ -131,25 +144,25 @@ public class MainActivityUserReg extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivityUserReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainActivityUserLogin.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
-                                startActivity(new Intent(MainActivityUserReg.this, MainActivityCustomerLandPage.class));
+                                startActivity(new Intent(MainActivityUserLogin.this, MainActivityCustomerLandPage.class));
                             } else {
-                                Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainActivityUserLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else {
                     editTextPassword.setText(null);
-                    Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivityUserLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                     progressBarUsr.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivityUserLogin.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                 progressBarUsr.setVisibility(View.GONE);
                 throw error.toException();
             }
