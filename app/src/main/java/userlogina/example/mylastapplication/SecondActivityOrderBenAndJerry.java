@@ -69,7 +69,7 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     private void addToCart() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference().child("Users").getRef().child("Shopping Cart").getRef();
+        dbRef = database.getReference().child("Users").child(user.getUid()).child("Shopping Cart").getRef();
 
 
         dbRef.push().setValue(new Dish(title.getText().toString(),description.getText().toString(),29.9,1)).addOnCompleteListener(new OnCompleteListener<Void>() {
