@@ -52,6 +52,7 @@
     <string name="saveBtn">שמור</string>
     <string name="quantity">כמות</string>
     <string name="addToCart">הוסף לעגלת הקניות</string>
+    <string name="dishPriceView">29.9 ש"ח</string>
 
 
     <string-array name="golda_ice_cream_tastes">
