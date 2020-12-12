@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLastApplication">
-        <activity android:name=".UserOrderMainActivity"
-            android:parentActivityName=".BenJerryActivityMenu"
+        <activity android:name=".BusinessAddDishActivity"></activity>
+        <activity
+            android:name=".UserOrderMainActivity"
             android:label="Details"
-            />
+            android:parentActivityName=".BenJerryActivityMenu" />
         <activity android:name=".BenJerryActivityMenu" />
         <activity android:name=".ForgotPasswordPageActivity" />
         <activity android:name=".goldaActivityMenu" />

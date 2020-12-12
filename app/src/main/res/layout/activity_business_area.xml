@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="0.044" />
 
     <Button
-        android:id="@+id/doneDealsBtn"
+        android:id="@+id/businessOlderOrders"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.077" />
 
     <Button
-        android:id="@+id/watchMenuBtn"
+        android:id="@+id/businessWatchMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -52,11 +52,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doneDealsBtn"
+        app:layout_constraintTop_toBottomOf="@+id/businessOlderOrders"
         app:layout_constraintVertical_bias="0.228" />
 
     <Button
-        android:id="@+id/addMenuBtn"
+        android:id="@+id/businessAddDish"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/watchMenuBtn"
+        app:layout_constraintTop_toBottomOf="@+id/businessWatchMenu"
         app:layout_constraintVertical_bias="0.182" />
 
     <TextView
@@ -81,7 +81,7 @@
         android:text="@string/app_logo"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/doneDealsBtn"
+        app:layout_constraintBottom_toTopOf="@+id/businessOlderOrders"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

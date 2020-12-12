@@ -46,6 +46,10 @@
     <string name="addMenu">הוספת תפריט</string>
     <string name="addDish">הוספת מנה</string>
     <string name='watchMenus'>צפייה בתפריט</string>
+    <string name="dishName">שם המנה</string>
+    <string name="dishPrice">מחיר</string>
+    <string name="dishDescription">תיאור המנה</string>
+    <string name="saveBtn">שמור</string>
     <string name="quantity">כמות</string>
 
 
