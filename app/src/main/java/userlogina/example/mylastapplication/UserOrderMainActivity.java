@@ -19,7 +19,7 @@ public class UserOrderMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_order);
+        setContentView(R.layout.activity_user_main_order);
 
         mainImageView = findViewById(R.id.imageViewBJOrder);
         title = findViewById(R.id.title);

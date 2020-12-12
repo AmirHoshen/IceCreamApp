@@ -34,7 +34,7 @@ public class UserRegister extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_customer);
+        setContentView(R.layout.activity_user_register);
 
         mAuth = FirebaseAuth.getInstance();
 

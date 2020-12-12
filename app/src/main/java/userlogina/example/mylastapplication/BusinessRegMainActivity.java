@@ -39,7 +39,7 @@ public class BusinessRegMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_reg_bus);
+        setContentView(R.layout.activity_business_registration_main);
         mAuth = FirebaseAuth.getInstance();
         emailBusiness = (EditText) findViewById(R.id.editTextTextEmailAddress);
         passwordBusiness = (EditText) findViewById(R.id.editTextNumberPassword);

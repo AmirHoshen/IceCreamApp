@@ -38,7 +38,7 @@ public class UserRegMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_reg_user);
+        setContentView(R.layout.activity_user_reg_main);
 
         mAuth = FirebaseAuth.getInstance();
 

@@ -13,7 +13,7 @@ public class UserLandPageMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_customer_land_page);
+        setContentView(R.layout.activity_user_main_land_page);
 
         TabLayout tabLayout = findViewById(R.id.tabBarCustomer);
         TabItem tabProfile = findViewById(R.id.tabProfile);

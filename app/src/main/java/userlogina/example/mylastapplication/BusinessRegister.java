@@ -40,7 +40,7 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_business);
+        setContentView(R.layout.activity_business_register);
 
         mAuth = FirebaseAuth.getInstance();
 
