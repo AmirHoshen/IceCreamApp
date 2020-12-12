@@ -51,6 +51,7 @@
     <string name="dishDescription">תיאור המנה</string>
     <string name="saveBtn">שמור</string>
     <string name="quantity">כמות</string>
+    <string name="addToCart">הוסף לעגלת הקניות</string>
 
 
     <string-array name="golda_ice_cream_tastes">

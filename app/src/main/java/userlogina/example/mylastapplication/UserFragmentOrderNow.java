@@ -29,7 +29,7 @@ public class UserFragmentOrderNow extends Fragment {
         goldaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), goldaActivityMenu.class));
+                startActivity(new Intent(getActivity(), GoldaActivityMenu.class));
             }
         });
 
