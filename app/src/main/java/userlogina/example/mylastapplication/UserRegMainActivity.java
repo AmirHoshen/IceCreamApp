@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
-public class MainActivityUserReg extends AppCompatActivity {
+public class UserRegMainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseCustomer;
     TextView registerNewUser, forgotPassword;
@@ -61,13 +61,13 @@ public class MainActivityUserReg extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)
             if(user.getUid().equals(FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).getRef().getKey())){
-                startActivity(new Intent(MainActivityUserReg.this, MainActivityCustomerLandPage.class));}
+                startActivity(new Intent(UserRegMainActivity.this, UserLandPageMainActivity.class));}
 
             registerNewUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     progressBarUsr.setVisibility(View.VISIBLE);
-                    startActivity(new Intent(MainActivityUserReg.this, RegisterCustomer.class));
+                    startActivity(new Intent(UserRegMainActivity.this, UserRegister.class));
                 }
             });
 
@@ -92,7 +92,7 @@ public class MainActivityUserReg extends AppCompatActivity {
     }
 
     private void forgotPassword() {
-        startActivity(new Intent(MainActivityUserReg.this, ForgotPasswordPageActivity.class));
+        startActivity(new Intent(UserRegMainActivity.this, ForgotPasswordPageActivity.class));
     }
 
     private void login() {
@@ -131,25 +131,25 @@ public class MainActivityUserReg extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivityUserReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserRegMainActivity.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
-                                startActivity(new Intent(MainActivityUserReg.this, MainActivityCustomerLandPage.class));
+                                startActivity(new Intent(UserRegMainActivity.this, UserLandPageMainActivity.class));
                             } else {
-                                Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserRegMainActivity.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                                 progressBarUsr.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else {
                     editTextPassword.setText(null);
-                    Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserRegMainActivity.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                     progressBarUsr.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivityUserReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserRegMainActivity.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                 progressBarUsr.setVisibility(View.GONE);
                 throw error.toException();
             }

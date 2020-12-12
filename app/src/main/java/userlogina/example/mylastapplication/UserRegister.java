@@ -21,9 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static userlogina.example.mylastapplication.MainActivityUserReg.progressBarUsr;
+import static userlogina.example.mylastapplication.UserRegMainActivity.progressBarUsr;
 
-public class RegisterCustomer extends AppCompatActivity implements View.OnClickListener {
+public class UserRegister extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private TextView banner, registerUser;
@@ -57,7 +57,7 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bannerRegCustomer:
-                startActivity(new Intent(this, MainActivityUserReg.class));
+                startActivity(new Intent(this, UserRegMainActivity.class));
                 break;
             case R.id.buttonRegNewCustomer:
                 registerUser();
@@ -131,18 +131,18 @@ public class RegisterCustomer extends AppCompatActivity implements View.OnClickL
                                         }
                                     }
                                 });
-                                Toast.makeText(RegisterCustomer.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserRegister.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                 progressBar2.setVisibility(View.GONE);
-                                startActivity(new Intent(RegisterCustomer.this, MainActivityCustomerLandPage.class));
+                                startActivity(new Intent(UserRegister.this, UserLandPageMainActivity.class));
                                 finish();
                             }else{
-                                Toast.makeText(RegisterCustomer.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                                 progressBar2.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(RegisterCustomer.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                     progressBar2.setVisibility(View.GONE);
                 }
             }

@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class OrderHistoryFragmentCustomer extends Fragment {
+public class UserFragmentOrderHistory extends Fragment {
 
 
 
-    public OrderHistoryFragmentCustomer() {
+    public UserFragmentOrderHistory() {
         // Required empty public constructor
     }
 

@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
-public class MainActivityBusinessReg extends AppCompatActivity {
+public class BusinessRegMainActivity extends AppCompatActivity {
 
     private EditText emailBusiness, passwordBusiness;
     public static ProgressBar progressBarBsns;
@@ -53,7 +53,7 @@ public class MainActivityBusinessReg extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null){
             if(user.getUid().equals("sYIsZ3lypWPUvha61jTuJ2KTNzV2") || user.getUid().equals("sYIsZ33ypWPUvha61jTuJ2KTNzV2"))
-                startActivity(new Intent(MainActivityBusinessReg.this, BusinessArea.class));}
+                startActivity(new Intent(BusinessRegMainActivity.this, BusinessArea.class));}
 
         registerBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class MainActivityBusinessReg extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.textViewRegisterBusinessMainRegBus:
                         progressBarBsns.setVisibility(View.VISIBLE);
-                        startActivity(new Intent(MainActivityBusinessReg.this, RegisterBusiness.class));
+                        startActivity(new Intent(BusinessRegMainActivity.this, BusinessRegister.class));
                         break;
                 }
             }
@@ -123,25 +123,25 @@ public class MainActivityBusinessReg extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivityBusinessReg.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BusinessRegMainActivity.this, "Welcome " + email.substring(0, email.lastIndexOf("@")) + "!", Toast.LENGTH_LONG).show();
                                 progressBarBsns.setVisibility(View.GONE);
-                                startActivity(new Intent(MainActivityBusinessReg.this, BusinessArea.class));
+                                startActivity(new Intent(BusinessRegMainActivity.this, BusinessArea.class));
                             } else {
-                                Toast.makeText(MainActivityBusinessReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BusinessRegMainActivity.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                                 progressBarBsns.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else {
                     passwordBusiness.setText(null);
-                    Toast.makeText(MainActivityBusinessReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BusinessRegMainActivity.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                     progressBarBsns.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivityBusinessReg.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
+                Toast.makeText(BusinessRegMainActivity.this, "Failed to login! Try again!", Toast.LENGTH_LONG).show();
                 progressBarBsns.setVisibility(View.GONE);
                 throw error.toException();
             }
