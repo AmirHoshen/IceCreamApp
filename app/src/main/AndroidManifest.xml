@@ -15,8 +15,7 @@
             android:label="Details"
             android:parentActivityName=".BenJerryActivityMenu" />
         <activity android:name=".BenJerryActivityMenu" />
-        <activity android:name=".SecondActivityOrderBenAndJerry"/>
-        <activity android:name=".ForgotPasswordPageActivity" />
+        <activity android:name=".SecondActivityOrderBenAndJerry"/>        <activity android:name=".ForgotPasswordPageActivity" />
         <activity android:name=".GoldaActivityMenu" />
         <activity android:name=".UserLandPageMainActivity" />
         <activity android:name=".BusinessArea" />
