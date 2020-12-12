@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class UserFragmentOrderNow extends Fragment {
 
     private ImageButton bJBtn, goldaBtn;
+    private Button moveToShoppingCartViewActivity;
 
     public UserFragmentOrderNow() {
         // Required empty public constructor
@@ -25,6 +27,8 @@ public class UserFragmentOrderNow extends Fragment {
 
         goldaBtn = (ImageButton) view.findViewById(R.id.goldaBtn);
         bJBtn = (ImageButton) view.findViewById(R.id.benjerryBtn);
+        moveToShoppingCartViewActivity = (Button)view.findViewById(R.id.cartViewBtn);
+
 
         goldaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +41,13 @@ public class UserFragmentOrderNow extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), BenJerryActivityMenu.class));
+            }
+        });
+
+        moveToShoppingCartViewActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
             }
         });
 

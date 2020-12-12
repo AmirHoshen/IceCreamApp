@@ -47,4 +47,61 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="14dp"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/goldaBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/shoppingCartTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dip"
+            android:text="@string/shoppingCart"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <ListView
+            android:id="@+id/ListViewCatalog"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:cacheColorHint="#ffffff"
+            android:choiceMode="multipleChoice"
+            android:clickable="true">
+
+        </ListView>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cartViewBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/payFromCart"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"></Button>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
