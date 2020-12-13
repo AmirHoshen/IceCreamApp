@@ -12,22 +12,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import userlogina.example.mylastapplication.Orders.Dish;
 
 public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
 
-    private ImageView mainImageView;
+    private ImageView mainImageView, menuItemBackBtnBJ;
     private TextView title, description;
 
     private Button addToCartBtn;
@@ -61,6 +56,14 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addToCart();
+            }
+        });
+
+        menuItemBackBtnBJ = findViewById(R.id.menuItemBackBtn);
+        menuItemBackBtnBJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
