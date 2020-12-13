@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class UserFragmentOrderNow extends Fragment {
 
@@ -29,7 +31,6 @@ public class UserFragmentOrderNow extends Fragment {
         bJBtn = (ImageButton) view.findViewById(R.id.benjerryBtn);
         moveToShoppingCartViewActivity = (Button)view.findViewById(R.id.cartViewBtn);
 
-
         goldaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,11 +48,16 @@ public class UserFragmentOrderNow extends Fragment {
         moveToShoppingCartViewActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                //fetchUserOrderDataFromFireBase();
+                startActivity(new Intent(getActivity(), UserShoppingCartActivity.class));
             }
         });
 
 
        return view;
     }
+//
+//    private void fetchUserOrderDataFromFireBase() {
+//
+//    }
 }

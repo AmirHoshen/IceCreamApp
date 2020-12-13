@@ -1,27 +1,42 @@
 package userlogina.example.mylastapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.state.State;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import userlogina.example.mylastapplication.Orders.Dish;
 
 public class UserShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView userShoppingCartRecyclerView;
-    private RecyclerViewAdapter RecyclerAdapter;
+
 
     private FirebaseDatabase database;
     private FirebaseUser user;
     private DatabaseReference dbRef;
 
+    HelperAdapter helperAdapter;
+
     private String dishTitle[];
     private String dishDescription[];
     private double dishPrices[];
 
+    List<Dish> fetchDish;
 
 
     @Override
@@ -30,6 +45,30 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_shopping_cart);
 
         userShoppingCartRecyclerView = findViewById(R.id.ShoppingCartRecyclerView);
+        userShoppingCartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        fetchDish = new ArrayList<>();
+
+        dbRef = FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Shopping Cart").getRef();
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds: snapshot.getChildren()){
+                    Dish dish = ds.getValue(Dish.class);
+                    fetchDish.add(dish);
+                }
+                helperAdapter = new HelperAdapter(fetchDish);
+                userShoppingCartRecyclerView.setAdapter(helperAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         //reference to user database shopping cart branch id
 
