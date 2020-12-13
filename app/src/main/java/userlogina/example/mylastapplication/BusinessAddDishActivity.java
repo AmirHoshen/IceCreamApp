@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import userlogina.example.mylastapplication.Orders.Dish;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,8 @@ public class BusinessAddDishActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addDish();
+                startActivity(new Intent(BusinessAddDishActivity.this, BusinessArea.class));
+                finish();
             }
         });
 
