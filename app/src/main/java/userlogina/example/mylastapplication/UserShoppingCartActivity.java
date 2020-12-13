@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +45,8 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     private TextView totalPriceText;
     private Button orderButton;
 
+    private ImageView backPressBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,16 @@ public class UserShoppingCartActivity extends AppCompatActivity {
 
             }
         });
+
+
+        backPressBtn = findViewById(R.id.backPressBtn);
+        backPressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         fetchDish = new ArrayList<>();
 
