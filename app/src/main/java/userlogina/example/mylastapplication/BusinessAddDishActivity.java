@@ -14,15 +14,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class BusinessAddDishActivity extends AppCompatActivity {
 
@@ -45,7 +41,7 @@ public class BusinessAddDishActivity extends AppCompatActivity {
         dishPrice = findViewById(R.id.editTextDishPrice);
         dishDescription = findViewById(R.id.editTextDishDescriptiontMultiLine);
         addDishButton = findViewById(R.id.addDishBtn);
-        businessBackPressBtn = findViewById(R.id.businessAddDishBackPressBtn);
+        businessBackPressBtn = findViewById(R.id.busOlderOrderBackPressBtn);
 
         businessBackPressBtn.setOnClickListener(new View.OnClickListener() {
             @Override

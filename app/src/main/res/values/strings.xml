@@ -57,6 +57,7 @@
     <string name="payFromCart">סיכום ההזמנה בעגלה</string>
     <string name="dishPriceView">29.9 ש"ח</string>
     <string name="previousPageActivity">לעמוד הקודם</string>
+    <string name="backToMainBanner">לחזרה לתפריט הראשי הקש על הבאנר</string>
 
     <string-array name="golda_ice_cream_tastes">
         <item>לואקר</item>

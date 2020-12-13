@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -13,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class BusinessArea extends AppCompatActivity {
 
     private Button olderOrders, watchMenu, addDish;
+    private TextView backToMainBanner;
 
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
@@ -26,10 +28,20 @@ public class BusinessArea extends AppCompatActivity {
         olderOrders = findViewById(R.id.businessOlderOrders);
         watchMenu = findViewById(R.id.businessWatchMenu);
         addDish = findViewById(R.id.businessAddDish);
+        backToMainBanner = findViewById(R.id.busAreaHeadLineText);
+
+        backToMainBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessArea.this, MainActivity.class));
+                finish();
+            }
+        });
 
         olderOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(BusinessArea.this, BusinessOlderOrdersActivity.class));
 
             }
         });
@@ -37,7 +49,8 @@ public class BusinessArea extends AppCompatActivity {
         watchMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(BusinessArea.this, BusinessWatchMenuActivity.class));
+                finish();
             }
         });
 
