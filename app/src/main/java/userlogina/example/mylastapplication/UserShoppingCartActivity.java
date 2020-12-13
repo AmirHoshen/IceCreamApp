@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,8 +38,11 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     private String dishTitle[];
     private String dishDescription[];
     private double dishPrices[];
+    private double totalPrice = 0.0;
 
     List<Dish> fetchDish;
+    private TextView totalPriceText;
+    private Button orderButton;
 
 
     @Override
@@ -46,6 +52,16 @@ public class UserShoppingCartActivity extends AppCompatActivity {
 
         userShoppingCartRecyclerView = findViewById(R.id.ShoppingCartRecyclerView);
         userShoppingCartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        totalPriceText = findViewById(R.id.totalOrderPrice);
+        orderButton = findViewById(R.id.OrderButton);
+
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         fetchDish = new ArrayList<>();
 
@@ -57,10 +73,13 @@ public class UserShoppingCartActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren()){
                     Dish dish = ds.getValue(Dish.class);
+                    totalPrice += dish.getPrice();
                     fetchDish.add(dish);
                 }
+                String priceText = "סה\"כ מחיר: "+ totalPrice;
                 helperAdapter = new HelperAdapter(fetchDish);
                 userShoppingCartRecyclerView.setAdapter(helperAdapter);
+                totalPriceText.setText(priceText);
             }
 
             @Override

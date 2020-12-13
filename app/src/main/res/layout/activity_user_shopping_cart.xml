@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/OrderButton"
         android:layout_width="140dp"
         android:layout_height="72dp"
         android:text="@string/orderNowTxt"
@@ -44,7 +44,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/OrderButton"
         app:layout_constraintTop_toBottomOf="@+id/ShoppingCartRecyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
