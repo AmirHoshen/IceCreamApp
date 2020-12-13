@@ -56,6 +56,7 @@
     <string name="orderNowTxt">הזמן</string>
     <string name="payFromCart">סיכום ההזמנה בעגלה</string>
     <string name="dishPriceView">29.9 ש"ח</string>
+    <string name="previousPageActivity">לעמוד הקודם</string>
 
 
     <string-array name="golda_ice_cream_tastes">
