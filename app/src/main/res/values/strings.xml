@@ -53,6 +53,7 @@
     <string name="quantity">כמות</string>
     <string name="addToCart">הוסף לעגלת הקניות</string>
     <string name="shoppingCart">עגלת קניות</string>
+    <string name="orderNowTxt">הזמן</string>
     <string name="payFromCart">סיכום ההזמנה בעגלה</string>
     <string name="dishPriceView">29.9 ש"ח</string>
 
