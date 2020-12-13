@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,7 @@ public class BusinessAddDishActivity extends AppCompatActivity {
     private FirebaseUser business;
     private EditText dishName,dishPrice,dishDescription;
     private Button addDishButton;
+    private ImageView businessBackPressBtn;
 
 
     @Override
@@ -43,6 +45,16 @@ public class BusinessAddDishActivity extends AppCompatActivity {
         dishPrice = findViewById(R.id.editTextDishPrice);
         dishDescription = findViewById(R.id.editTextDishDescriptiontMultiLine);
         addDishButton = findViewById(R.id.addDishBtn);
+        businessBackPressBtn = findViewById(R.id.businessAddDishBackPressBtn);
+
+        businessBackPressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessAddDishActivity.this, BusinessArea.class));
+                finish();
+            }
+        });
+
         addDishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
