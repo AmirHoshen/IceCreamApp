@@ -30,7 +30,7 @@ import static userlogina.example.mylastapplication.MainActivity.progressBar;
 public class UserRegMainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseCustomer;
-    TextView registerNewUser, forgotPassword;
+    TextView registerNewUser, forgotPassword , backToMainBanner;
     EditText editTextEmail, editTextPassword;
     Button loginUsr;
     public static ProgressBar progressBarUsr;
@@ -54,9 +54,18 @@ public class UserRegMainActivity extends AppCompatActivity {
 
         loginUsr = (Button) findViewById(R.id.buttonLoginUserReg);
 
+        backToMainBanner = (TextView)findViewById(R.id.txtViewLogoMain1);
 
         progressBarUsr = (ProgressBar) findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.INVISIBLE);
+
+        backToMainBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserRegMainActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)

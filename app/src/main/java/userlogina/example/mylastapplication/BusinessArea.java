@@ -34,6 +34,7 @@ public class BusinessArea extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(BusinessArea.this, MainActivity.class));
+                ///logout business user
                 finish();
             }
         });

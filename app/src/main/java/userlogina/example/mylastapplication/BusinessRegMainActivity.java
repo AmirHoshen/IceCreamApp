@@ -31,7 +31,7 @@ public class BusinessRegMainActivity extends AppCompatActivity {
 
     private EditText emailBusiness, passwordBusiness;
     public static ProgressBar progressBarBsns;
-    private TextView registerBusiness, forgotPasswordBtn;
+    private TextView registerBusiness, forgotPasswordBtn, backToMainBanner;
     private Button loginBtnBusiness;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseBusiness;
@@ -47,6 +47,16 @@ public class BusinessRegMainActivity extends AppCompatActivity {
         registerBusiness = (TextView) findViewById(R.id.textViewRegisterBusinessMainRegBus);
         forgotPasswordBtn = (TextView) findViewById(R.id.forgorPasswordBtnBus);
         loginBtnBusiness = (Button) findViewById(R.id.buttonLoginBusinessReg);
+        backToMainBanner = (TextView)findViewById(R.id.txtViewLogoMain1);
+
+        backToMainBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessRegMainActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+
         databaseBusiness = FirebaseDatabase.getInstance().getReference().child("Business");
         progressBar.setVisibility(View.INVISIBLE);
 

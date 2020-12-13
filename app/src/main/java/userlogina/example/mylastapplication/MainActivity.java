@@ -50,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
     private void openCustomerLoginActivity() {
         progressBar.setVisibility(View.VISIBLE);
         startActivity(new Intent(MainActivity.this, UserRegMainActivity.class));
+        finish();
     }
 
     private void openBusinessLoginActivity(){
         progressBar.setVisibility(View.VISIBLE);
         startActivity(new Intent(MainActivity.this, BusinessRegMainActivity.class));
+        finish();
+
     }
 }
