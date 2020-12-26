@@ -6,37 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".UserFragmentOrderNow">
 
+
     <ImageButton
         android:id="@+id/goldaBtn"
-        android:layout_width="225dp"
-        android:layout_height="204dp"
+        android:layout_width="246dp"
+        android:layout_height="107dp"
         android:layout_marginStart="45dp"
 
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="87dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:layout_marginRight="45dp"
         android:src="@drawable/goldalogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/benjerryBtn"
-        android:layout_width="225dp"
-        android:layout_height="204dp"
+        android:layout_width="253dp"
+        android:layout_height="120dp"
         android:layout_marginStart="45dp"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:layout_marginRight="45dp"
         android:src="@drawable/b_jlogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goldaBtn" />
 
+    <Spinner
+        android:id="@+id/spinnerLocationUserOrderNow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/benjerryBtn" />
+
+    <Button
+        android:id="@+id/buttonUserOrderNowselect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="146dp"
+        android:layout_marginLeft="146dp"
+        android:layout_marginTop="12dp"
+        android:text="Select"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#2196F3"
+        app:layout_constraintStart_toStartOf="@+id/spinnerLocationUserOrderNow"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLocationUserOrderNow" />
 
     <Button
         android:id="@+id/cartViewBtn"
@@ -45,14 +67,16 @@
         android:layout_marginTop="51dp"
         android:layout_marginBottom="81dp"
         android:text="@string/payFromCart"
-        app:backgroundTint="#2196F3"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:backgroundTint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/benjerryBtn"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/benjerryBtn"
+        app:layout_constraintVertical_bias="1.0"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

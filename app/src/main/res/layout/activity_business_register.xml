@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".BusinessRegister">
 
+
+    <EditText
+        android:id="@+id/editTextBusinessPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#00FFFFFF"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/txtColorHint"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBusinessPhone"
+        app:layout_constraintVertical_bias="0.061" />
+
     <TextView
         android:id="@+id/registerBusinessHeadline"
         android:layout_width="wrap_content"
@@ -40,9 +62,10 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerBusinessHeadline"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintVertical_bias="0.045" />
 
     <EditText
         android:id="@+id/editTextBusinessName"
@@ -105,27 +128,6 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextBusinessEmailAddress"
         app:layout_constraintVertical_bias="0.064" />
 
-    <EditText
-        android:id="@+id/editTextBusinessPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#00FFFFFF"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textColorHint="@color/txtColorHint"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBusinessPhone"
-        app:layout_constraintVertical_bias="0.086" />
-
     <Button
         android:id="@+id/buttonRegNewBusiness"
         android:layout_width="0dp"
@@ -142,28 +144,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBusinessPassword"
-        app:layout_constraintVertical_bias="0.361" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar3"
         style="?android:attr/progressBarStyle"
-        android:layout_width="95dp"
-        android:layout_height="82dp"
+        android:layout_width="96dp"
+        android:layout_height="15dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerBusinessHeadline"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintVertical_bias="0.824" />
 
     <TextView
         android:id="@+id/bannerRegBusiness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_logo"
         android:fontFamily="@font/alex_brush"
+        android:text="@string/app_logo"
         android:textColor="#2196F3"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -171,4 +172,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerBusinessLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBoxBusniessBJ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/ben_and_jerry_s"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerBusinessLocation"
+        app:layout_constraintStart_toStartOf="@+id/editTextBusinessPassword" />
+
+    <CheckBox
+        android:id="@+id/checkBoxBusniessGolda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="83dp"
+        android:layout_marginRight="83dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/golda"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerBusinessLocation"
+        app:layout_constraintEnd_toEndOf="@+id/editTextBusinessPassword" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

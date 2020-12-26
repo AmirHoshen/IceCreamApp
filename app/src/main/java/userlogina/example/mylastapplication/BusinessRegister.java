@@ -9,9 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,14 +26,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-
+import static userlogina.example.mylastapplication.R.array.Cities;
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 import static userlogina.example.mylastapplication.BusinessRegMainActivity.progressBarBsns;
 
-public class BusinessRegister extends AppCompatActivity implements View.OnClickListener {
+public class BusinessRegister extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private FirebaseAuth mAuth;
     private TextView banner, registerBusiness;
+    private String city;
+    private String UID;
+    private CheckBox iceCreamOwner_BJ, iceCreamOwner_golda;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     //   DatabaseReference myRef = database.getReference();
 
@@ -59,6 +66,42 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
         progressBarBsns.setVisibility(View.INVISIBLE);
         progressBar3 = (ProgressBar)findViewById(R.id.progressBar3);
 
+        iceCreamOwner_golda = findViewById(R.id.checkBoxBusniessGolda);
+        iceCreamOwner_BJ = findViewById(R.id.checkBoxBusniessBJ);
+
+        UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        iceCreamOwner_golda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (iceCreamOwner_golda.isChecked()) {
+                    iceCreamOwner_BJ.setChecked(false);
+                }
+                if (iceCreamOwner_BJ.isChecked()) {
+                    iceCreamOwner_golda.setChecked(false);
+                }
+            }
+        });
+
+        iceCreamOwner_BJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (iceCreamOwner_BJ.isChecked()) {
+                    iceCreamOwner_golda.setChecked(false);
+                }
+                if (iceCreamOwner_golda.isChecked()) {
+                    iceCreamOwner_BJ.setChecked(false);
+                }
+            }
+        });
+
+        //Cities Spinner
+        Spinner Cities_spinner = findViewById(R.id.spinnerBusinessLocation);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, Cities, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Cities_spinner.setAdapter(adapter);
+        Cities_spinner.setOnItemSelectedListener(this);
+
     }
 
     @Override
@@ -73,13 +116,20 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser() {
-        String businessOwnerFullName, businessName,email, phone, password;
-
+        String businessOwnerFullName, businessName, email, phone ,location, password;
         businessOwnerFullName = editTextBusinessOwnFullName.getText().toString().trim();
         businessName = editTextBusinessName.getText().toString().trim();
         email =  editTextEmail.getText().toString().trim();
         phone = editTextPhone.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
+        location = city;
+        final String type;
+        if (iceCreamOwner_golda.isChecked()) {
+            type = "Golda";
+        }
+        else {
+            type = "BJ";
+        }
         ArrayList<Order> orders = new ArrayList<Order>();
         ArrayList<Dish> order = new ArrayList<Dish>();
         order.add(new Dish("vanila","Tasty Shit",2,1));
@@ -127,7 +177,7 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Business b = new Business(businessOwnerFullName, businessName, email, phone, password,orders);
+                    Business b = new Business(businessOwnerFullName, businessName, email, phone, location, type, password, UID, orders);
 
                     //return the id for the registered user
                     FirebaseDatabase.getInstance().getReference("Business")
@@ -138,20 +188,32 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
 
                             if(task.isSuccessful()){
                                 Toast.makeText(BusinessRegister.this, "Business owner has been registered successfully", Toast.LENGTH_LONG).show();
-                                progressBar3.setVisibility(View.GONE);
+                                finish();
+
+                                startActivity(new Intent(BusinessRegister.this, BusinessArea.class));
                                 finish();
                             }else{
-                                Toast.makeText(BusinessRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                                progressBar3.setVisibility(View.GONE);
+                                Toast.makeText(BusinessRegister.this, "Failed to register1! Try again!", Toast.LENGTH_LONG).show();
+
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(BusinessRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                    progressBar3.setVisibility(View.GONE);
+                    Toast.makeText(BusinessRegister.this, "Failed to register2! Try again!", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        city = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), city, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 }

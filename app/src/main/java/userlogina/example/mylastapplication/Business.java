@@ -7,18 +7,45 @@ import userlogina.example.mylastapplication.Orders.Order;
 
 public class Business {
 
-    String businessOwnerName, businessName, email, phone , password;
+    String businessOwnerName, businessName, email, phone ,location, type, password, UID;;
     ArrayList<Order> Orders;
 
     public Business(){}
 
-    public Business(String businessOwnerName, String businessName, String email, String phone, String password,ArrayList<Order> orders) {
+    public Business(String businessOwnerName, String businessName, String email, String phone,String location, String type, String password, String UID, ArrayList<Order> orders) {
         this.businessOwnerName = businessOwnerName;
         this.businessName = businessName;
         this.email = email;
         this.phone = phone;
+        this.location = location;
+        this.type = type;
         this.password = password;
+        this.UID = UID;
         this.Orders = orders;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getBusinessOwnerName() {
