@@ -11,6 +11,8 @@
         android:layout_width="229dp"
         android:layout_height="147dp"
         android:layout_marginTop="108dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,9 +28,11 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
+        android:layout_marginBottom="14dp"
         android:text="TextView"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/orderDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainImageView" />
@@ -42,9 +46,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
+        android:layout_marginBottom="24dp"
         android:text="TextView"
         android:textSize="30sp"
         android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddToCartBJ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,10 +88,13 @@
         android:layout_marginRight="26dp"
         android:layout_marginBottom="178dp"
         android:text="@string/dishPriceView"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/btnAddToCartBJ"
         app:layout_constraintEnd_toStartOf="@+id/mainImageView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/menuItemBackBtn"
