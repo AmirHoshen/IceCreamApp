@@ -93,8 +93,12 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = (Integer.parseInt(removeIndex.getText().toString()));
-                removeItem(position);
+                if (removeIndex.getText().toString().equals(null) || removeIndex.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Legal index value must be inserted!", Toast.LENGTH_LONG).show();
+                }else{
+                    int position = (Integer.parseInt(removeIndex.getText().toString()));
+                    removeItem(position);
+                }
             }
         });
 
