@@ -13,7 +13,7 @@ import android.widget.Button;
 
 public class BenJerryActivityMenu extends AppCompatActivity {
 
-    Button previousPageBenJerryBtn;
+    Button previousPageBenJerryBtn, shoppingCartBJ;
     RecyclerView benJerry;
     String s1[], s2[];
 
@@ -34,6 +34,7 @@ public class BenJerryActivityMenu extends AppCompatActivity {
         setContentView(R.layout.activity_ben_jerry_menu);
 
         previousPageBenJerryBtn = (Button)findViewById(R.id.previousPageBenJerryBtn);
+        shoppingCartBJ = (Button)findViewById(R.id.shoppingCartBenJerryBtn);
 
         previousPageBenJerryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +42,15 @@ public class BenJerryActivityMenu extends AppCompatActivity {
                 finish();
             }
         });
-        
+
+        shoppingCartBJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    //fetchUserOrderDataFromFireBase();
+                    startActivity(new Intent(BenJerryActivityMenu.this, UserShoppingCartActivity.class));
+                    finish();
+            }
+        });
         benJerry = findViewById(R.id.benjerryRecyclerView);
 
         s1 = getResources().getStringArray(R.array.ben_jerry_ice_cream_tastes);

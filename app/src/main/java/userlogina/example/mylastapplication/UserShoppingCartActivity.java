@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,7 +44,8 @@ public class UserShoppingCartActivity extends AppCompatActivity {
 
     List<Dish> fetchDish;
     private TextView totalPriceText;
-    private Button orderButton;
+    private EditText removeIndex;
+    private Button orderButton, removeButton;
 
     private ImageView backPressBtn;
 
@@ -52,16 +55,31 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_shopping_cart);
 
+
+        createExampleList();
+        buildRecyclerView();
+
+
+
         userShoppingCartRecyclerView = findViewById(R.id.ShoppingCartRecyclerView);
         userShoppingCartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         totalPriceText = findViewById(R.id.totalOrderPrice);
         orderButton = findViewById(R.id.OrderButton);
+        removeIndex = findViewById(R.id.editTextNumber);
 
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        removeButton = findViewById(R.id.removeButton);
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (Integer.parseInt(removeIndex.getText().toString()));
+                removeItem(position);
             }
         });
 
@@ -116,6 +134,22 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         //4.if data sent successfully push this data into this user new branch called OrderHistory
         // and empty this user shopping cart.
 
+       }
+    public void removeItem(int position){
+        if(position>fetchDish.size()-1){
+            Toast.makeText(getApplicationContext(),"Chosen position is illegal", Toast.LENGTH_SHORT).show();
+        }else{
+
+            fetchDish.remove(position);
+            helperAdapter.notifyItemRemoved(position);
+            dbRef.removeValue();
+
+        }
+    }
+
+    public void buildRecyclerView() {
+    }
+    public void createExampleList(){
 
     }
 }

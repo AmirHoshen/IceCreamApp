@@ -22,7 +22,6 @@ public class UserFragmentOrderNow extends Fragment implements AdapterView.OnItem
 
     private ImageButton bJBtn, goldaBtn;
     private Button moveToShoppingCartViewActivity;
-    private Button button_select;
     private String city_from_spinner = "Haifa";
     private String type_from_cb = "Golda";
     boolean img_visible = true;//(If image's visibility is set to true in xml file else false)
@@ -37,46 +36,32 @@ public class UserFragmentOrderNow extends Fragment implements AdapterView.OnItem
         View view = inflater.inflate(R.layout.fragment_user_order_now, container, false);
 
 
-        button_select = (Button) view.findViewById(R.id.buttonUserOrderNowselect);
         goldaBtn = (ImageButton) view.findViewById(R.id.goldaBtn);
         bJBtn = (ImageButton) view.findViewById(R.id.benjerryBtn);
         moveToShoppingCartViewActivity = (Button) view.findViewById(R.id.cartViewBtn);
 
-        bJBtn.setOnClickListener(v -> {
-            img_visible = true;
-            type_from_cb = "BJ";
-        });
-
-        goldaBtn.setOnClickListener(v -> {
-            img_visible = false;
-            type_from_cb = "Golda";
-        });
-
-        //Cities Spinner
-        Spinner Cities_spinner = view.findViewById(R.id.spinnerLocationUserOrderNow);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), Cities, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Cities_spinner.setAdapter(adapter);
-        Cities_spinner.setOnItemSelectedListener(this);
-
-
-        button_select.setOnClickListener(new View.OnClickListener() {
+        bJBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ListBusinessFilterActivity.class);
-                intent.putExtra("type", type_from_cb);
-                intent.putExtra("location", city_from_spinner);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), BenJerryActivityMenu.class));
             }
         });
 
-        moveToShoppingCartViewActivity.setOnClickListener(new View.OnClickListener() {
+
+        goldaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //fetchUserOrderDataFromFireBase();
-                startActivity(new Intent(getActivity(), UserShoppingCartActivity.class));
+                startActivity(new Intent(getActivity(), GoldaActivityMenu.class));
             }
         });
+
+//        moveToShoppingCartViewActivity.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //fetchUserOrderDataFromFireBase();
+//                startActivity(new Intent(getActivity(), UserShoppingCartActivity.class));
+//            }
+//        });
 
         return view;
     }
