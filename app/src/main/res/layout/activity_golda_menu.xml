@@ -18,11 +18,11 @@
 
     <Button
         android:id="@+id/previousPageGoldaBtn"
-        android:layout_width="349dp"
-        android:layout_height="65dp"
+        android:layout_width="350dp"
+        android:layout_height="49dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/previousPageActivity"
@@ -31,6 +31,27 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/benjerryRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/shoppingCartGolda"
+        android:layout_width="353dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/shoppingCart"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="#2979FF"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewGolda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/previousPageGoldaBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
