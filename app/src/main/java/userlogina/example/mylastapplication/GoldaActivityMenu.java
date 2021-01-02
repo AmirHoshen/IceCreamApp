@@ -8,10 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class GoldaActivityMenu extends AppCompatActivity {
 
-    Button previousPageGoldaBtn;
+    Button previousPageGoldaBtn, shoppingCartGolda;
     RecyclerView goldaRecyclerView;
 
     String s1[], s2[];
@@ -33,11 +34,19 @@ public class GoldaActivityMenu extends AppCompatActivity {
 
         goldaRecyclerView = findViewById(R.id.recyclerViewGolda);
         previousPageGoldaBtn = findViewById(R.id.previousPageGoldaBtn);
+        shoppingCartGolda = findViewById(R.id.shoppingCartGolda);
 
         previousPageGoldaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        shoppingCartGolda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "need to split shoppingcart object for esach resturant", Toast.LENGTH_LONG).show();
             }
         });
 
