@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -40,12 +41,12 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     private String dishTitle[];
     private String dishDescription[];
     private double dishPrices[];
-    private double totalPrice = 0.0;
+    public static double totalPrice = 0.0;
 
     List<Dish> fetchDish;
-    private TextView totalPriceText;
+    public TextView totalPriceText;
     private EditText removeIndex;
-    private Button orderButton, removeButton;
+    private Button orderButton, removeButton, removeCart;
 
     private ImageView backPressBtn;
 
@@ -67,6 +68,20 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         totalPriceText = findViewById(R.id.totalOrderPrice);
         orderButton = findViewById(R.id.OrderButton);
         removeIndex = findViewById(R.id.editTextNumber);
+        removeCart = findViewById(R.id.deleteCart);
+
+        removeCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbRef.removeValue();
+                totalPrice = 0.0;
+                totalPriceText.setText( ""+totalPrice);
+                for(int i=0; i<=fetchDish.size()-1; i++){
+                    removeItem(i);
+                }
+
+            }
+        });
 
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +121,7 @@ public class UserShoppingCartActivity extends AppCompatActivity {
                     totalPrice += dish.getPrice();
                     fetchDish.add(dish);
                 }
-                String priceText = "סה\"כ מחיר: "+ totalPrice;
+                String priceText = totalPrice +"";
                 helperAdapter = new HelperAdapter(fetchDish);
                 userShoppingCartRecyclerView.setAdapter(helperAdapter);
                 totalPriceText.setText(priceText);
@@ -139,10 +154,30 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         if(position>fetchDish.size()-1){
             Toast.makeText(getApplicationContext(),"Chosen position is illegal", Toast.LENGTH_SHORT).show();
         }else{
+            if(position == 0 && fetchDish.size() == 0){
+                totalPrice = 0.0;
+            }else{
+                double itemRemovedPrice = fetchDish.get(position).getPrice();
+                Query que = dbRef.orderByChild("falvor").equalTo(fetchDish.get(position).getFalvor());
 
-            fetchDish.remove(position);
-            helperAdapter.notifyItemRemoved(position);
-            dbRef.removeValue();
+                que.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        snapshot.getChildren().iterator().next().getRef().removeValue();
+                        totalPrice -=  itemRemovedPrice;
+                        String priceText = ""+ (double)totalPrice;
+                        totalPriceText.setText(priceText);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                fetchDish.remove(position);
+                helperAdapter.notifyItemRemoved(position);
+            }
 
         }
     }
