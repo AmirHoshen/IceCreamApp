@@ -8,16 +8,16 @@
 
     <EditText
         android:id="@+id/editTextTextPersonNameRegCustomer"
-        android:fontFamily="@font/alex_brush"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/userName"
         android:background="@color/inputFieldsTintColor"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="@string/userName"
         android:inputType="textPersonName"
         android:textColorHint="@color/txtColorHint"
         android:textSize="30sp"
@@ -30,19 +30,19 @@
 
     <EditText
         android:id="@+id/editTextTextEmailAddressRegCus"
-        android:fontFamily="@font/alex_brush"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@color/inputFieldsTintColor"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="@string/email_address"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/txtColorHint"
         android:textSize="30sp"
-        android:background="@color/inputFieldsTintColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
@@ -52,7 +52,6 @@
 
     <EditText
         android:id="@+id/editTextPhoneRegCus"
-        android:fontFamily="@font/alex_brush"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -61,6 +60,7 @@
         android:layout_marginRight="8dp"
         android:background="@color/inputFieldsTintColor"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="@string/phoneNumber"
         android:inputType="phone"
         android:textColorHint="@color/txtColorHint"
@@ -73,7 +73,6 @@
 
     <EditText
         android:id="@+id/editTextTextPasswordRegCus"
-        android:fontFamily="@font/alex_brush"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -82,6 +81,7 @@
         android:layout_marginRight="8dp"
         android:background="@color/inputFieldsTintColor"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textColorHighlight="#00FFFFFF"

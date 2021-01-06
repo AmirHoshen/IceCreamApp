@@ -1,10 +1,15 @@
 package userlogina.example.mylastapplication.Orders;
 
+import android.net.Uri;
+
+
 public class Dish {
     private String falvor;
     private String description;
     private double price;
     private double amount;
+    private String Tag;
+    private String imageUrl;
 
 
     public Dish(){
@@ -15,12 +20,15 @@ public class Dish {
         this.description = description;
         this.price = price;
         this.amount = amount;
+        this.Tag = "";
     }
 
-    public Dish(String dishName, String dishDescription, Double dishPrice) {
+    public Dish(String dishName, String dishDescription, Double dishPrice, String image) {
         this.falvor = dishName;
         this.description = dishDescription;
         this.price = dishPrice;
+        this.imageUrl = image;
+        this.Tag = "";
 
     }
 
@@ -54,5 +62,21 @@ public class Dish {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String getTag() {
+        return Tag;
+    }
+
+    public void setTag(String tag) {
+        Tag = tag;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

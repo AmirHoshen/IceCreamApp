@@ -118,7 +118,7 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         fetchDish = new ArrayList<>();
 
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Shopping Cart").getRef();
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("ShoppingCart").getRef();
 
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -57,7 +57,7 @@ public class UserRegMainActivity extends AppCompatActivity {
         backToMainBanner = (TextView)findViewById(R.id.txtViewLogoMain1);
 
         progressBarUsr = (ProgressBar) findViewById(R.id.progressBar1);
-        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar.setVisibility(View.INVISIBLE);
 
         backToMainBanner.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -63,6 +63,8 @@
     <string name="deleteCart">מחק את עגלת הקניות</string>
     <string name="ben_and_jerry_s">Ben And Jerry\'s</string>
     <string name="golda">Golda</string>
+    <string name="UploadButton">העלאת תמונה</string>
+    <string name="AddDishText">הוספת מנה:</string>
 
     <string-array name="golda_ice_cream_tastes">
         <item>לואקר</item>

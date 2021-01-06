@@ -48,6 +48,8 @@ public class BusinessRegMainActivity extends AppCompatActivity {
         forgotPasswordBtn = (TextView) findViewById(R.id.forgorPasswordBtnBus);
         loginBtnBusiness = (Button) findViewById(R.id.buttonLoginBusinessReg);
         backToMainBanner = (TextView)findViewById(R.id.txtViewLogoMain1);
+        if(FirebaseAuth.getInstance().isSignInWithEmailLink(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+            startActivity(new Intent(BusinessRegMainActivity.this, BusinessArea.class));
 
         backToMainBanner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +60,7 @@ public class BusinessRegMainActivity extends AppCompatActivity {
         });
 
         databaseBusiness = FirebaseDatabase.getInstance().getReference().child("Business");
-        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar.setVisibility(View.INVISIBLE);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null){

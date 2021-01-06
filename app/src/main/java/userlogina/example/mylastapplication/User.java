@@ -1,7 +1,10 @@
 package userlogina.example.mylastapplication;
 
+import userlogina.example.mylastapplication.Orders.ShoppingCart;
+
 public class User {
     public String fullName, email, phone , password;
+    public ShoppingCart shoppingCart;
 
     public User(){}
 
@@ -10,6 +13,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.shoppingCart = null;
     }
 
     public String getFullName() {
@@ -42,5 +46,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 }

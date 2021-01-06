@@ -10,22 +10,38 @@
         android:id="@+id/editTextDishName"
         android:layout_width="351dp"
         android:layout_height="51dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
         android:ems="10"
         android:hint="@string/dishName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/addDishBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/saveBtn"
+        android:textColor="#DBE5E6"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:backgroundTint="#2196F3"
+        app:layout_constraintBottom_toTopOf="@+id/busOlderOrderBackPressBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dishImagesUp"
+        app:layout_constraintVertical_bias="1.0" />
+
     <EditText
         android:id="@+id/editTextDishDescriptiontMultiLine"
-        android:layout_width="365dp"
-        android:layout_height="269dp"
+        android:layout_width="347dp"
+        android:layout_height="147dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
@@ -37,40 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDishName" />
 
-    <EditText
-        android:id="@+id/editTextDishPrice"
-        android:layout_width="85dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="290dp"
-        android:layout_marginLeft="290dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginRight="37dp"
-        android:ems="10"
-        android:hint="@string/dishPrice"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDishDescriptiontMultiLine" />
-
-    <Button
-        android:id="@+id/addDishBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginLeft="155dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginRight="163dp"
-        android:text="@string/saveBtn"
-        android:textColor="#DBE5E6"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.318"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDishPrice" />
     <ImageView
         android:id="@+id/busOlderOrderBackPressBtn"
         android:layout_width="0dp"
@@ -80,7 +62,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="32dp"
         android:background="#1DE9B6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,5 +70,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OrderButton"
         app:srcCompat="@drawable/abc_vector_test" />
+
+    <ImageView
+        android:id="@+id/dishImagesUp"
+        android:layout_width="163dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDishDescriptiontMultiLine"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/UploadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/UploadButton"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.678"
+        app:layout_constraintStart_toEndOf="@+id/dishImagesUp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDishDescriptiontMultiLine"
+        app:rippleColor="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/editTextDishPrice"
+        android:layout_width="82dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="@string/dishPrice"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/addDishBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintStart_toEndOf="@+id/dishImagesUp"
+        app:layout_constraintTop_toBottomOf="@+id/UploadButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/PageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AddDishText"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDishName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.463" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

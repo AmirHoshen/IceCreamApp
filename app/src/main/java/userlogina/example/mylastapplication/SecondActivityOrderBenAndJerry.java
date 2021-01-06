@@ -3,6 +3,7 @@ package userlogina.example.mylastapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ import userlogina.example.mylastapplication.Orders.Dish;
 public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
 
     private ImageView mainImageView, menuItemBackBtnBJ;
-    private TextView title, description;
+    private TextView title, description,price;
 
     private Button addToCartBtn;
 
@@ -31,10 +32,10 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
 
-    EditText dishPrice;
-    double price;
+    //EditText dishPrice;
+    double _price;
     String dishTitle, dishDescription;
-    int myImage;
+    Bitmap image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
         mainImageView = findViewById(R.id.mainImageView);
         title = findViewById(R.id.orderTitle);
         description = findViewById(R.id.orderDescription);
-//        dishPrice = findViewById(R.id.priceTageDish);
+        price = findViewById(R.id.dishPriceView);
 
         getData();
         setData();
@@ -72,10 +73,10 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     private void addToCart() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference().child("Users").child(user.getUid()).child("Shopping Cart").getRef();
+        dbRef = database.getReference().child("Users").child(user.getUid()).child("ShoppingCart").getRef();
 
 
-        dbRef.push().setValue(new Dish(title.getText().toString(),description.getText().toString(),29.9,1)).addOnCompleteListener(new OnCompleteListener<Void>() {
+        dbRef.push().setValue(new Dish(title.getText().toString(),description.getText().toString(),Double.parseDouble(price.getText().toString()),1)).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -91,12 +92,12 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     }
 
     private void getData(){
-        if(getIntent().hasExtra("myImage") && getIntent().hasExtra("data1") && getIntent().hasExtra("data2") ){
+        if(getIntent().hasExtra("image") && getIntent().hasExtra("name") && getIntent().hasExtra("description") && getIntent().hasExtra("price") ){
 
-            dishTitle = getIntent().getStringExtra("data1");
-            dishDescription = getIntent().getStringExtra("data2");
-            myImage = getIntent().getIntExtra("myImage",1);
-//            price = Double.parseDouble(dishPrice.getText().toString());
+            dishTitle = getIntent().getStringExtra("name");
+            dishDescription = getIntent().getStringExtra("description");
+            image =  getIntent().getParcelableExtra("image");
+            _price = getIntent().getDoubleExtra("price",1);
 
         }else{
             Toast.makeText(this, "No Data, please contact support",Toast.LENGTH_SHORT).show();
@@ -106,7 +107,8 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     private void setData(){
         title.setText(dishTitle);
         description.setText(dishDescription);
-        mainImageView.setImageResource(myImage);
+        mainImageView.setImageBitmap(image);
+        price.setText(""+_price);
 
     }
 }
