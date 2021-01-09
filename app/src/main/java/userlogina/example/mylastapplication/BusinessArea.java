@@ -62,15 +62,7 @@ public class BusinessArea extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        if(firebaseAuth.getCurrentUser() == null){
-                            firebaseAuth.signOut();
-
-                        }
-                    }
-                };
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(BusinessArea.this, MainActivity.class));
                 finish();
             }
