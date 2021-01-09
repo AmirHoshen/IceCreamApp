@@ -42,15 +42,16 @@ public class BenJerryActivityMenu extends AppCompatActivity {
 
     Button previousPageBenJerryBtn, shoppingCartBJ;
     RecyclerView benJerry;
-
+    RecyclerViewAdapter recViewAdapter;
     ArrayList<Dish> dishList = new ArrayList<>();
     ArrayList<String> _name = new ArrayList<>();
     ArrayList<String> _description = new ArrayList<>();
     ArrayList<Bitmap> _images = new ArrayList<>();
     ArrayList<Double> _price = new ArrayList<>();
+    ArrayList<Uri> images = new ArrayList<>();
 
 
-    Query Dishes = FirebaseDatabase.getInstance().getReference().child("Business").child("HztqosDImpb5hO7d7XF7ev2l7152").child("Dishes").getRef();
+    Query Dishes = FirebaseDatabase.getInstance().getReference().child("Business").child("nFIRYcoyF7fAE9dXIQbhRKnyEC93").child("Dishes").getRef();
 
 
 
@@ -78,43 +79,45 @@ public class BenJerryActivityMenu extends AppCompatActivity {
                 finish();
             }
         });
-        Collector();
+        synchronized (this){
+            Collector();
+        }
 
         benJerry = findViewById(R.id.benjerryRecyclerView);
-        RecyclerViewAdapter recViewAdapter = new RecyclerViewAdapter(this, _name, _description,_price, _images);
-
-        benJerry.setAdapter(recViewAdapter);
-        benJerry.setLayoutManager(new LinearLayoutManager(this));
 
     }
-    public Bitmap getBitmapFromURI(Uri uri){
-        String[] filePathColumn = {MediaStore.Images.Media.DATA};
-        Cursor cursor = BenJerryActivityMenu.this.getContentResolver().query(uri, filePathColumn, null, null, null);
-        if(cursor!=null){
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            File f_image = new File(cursor.getString(columnIndex));
-            cursor.close();
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            return BitmapFactory.decodeFile(f_image.getAbsolutePath(), o2);
-        }
-        return null;
-    }
-    public void Collector(){
+
+    public synchronized void Collector(){
         Dishes.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public synchronized void onDataChange(@NonNull DataSnapshot snapshot) {
                 //System.out.println(snapshot.getKey());
                 if(snapshot.exists())
                     for(DataSnapshot snap: snapshot.getChildren()){
                         System.out.println("Dish located!");
                         Dish dish = snap.getValue(Dish.class);
                         dishList.add(dish);
-                        System.out.println(dish.getFalvor());
+                        FirebaseStorage.getInstance().getReference().child(dish.getImageUrl()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public synchronized void onSuccess(Uri uri) {
+                                System.out.println("Image Got");
+                                images.add(uri);
+                                Toast.makeText(BenJerryActivityMenu.this,"Image Getting!",Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public synchronized void onFailure(@NonNull Exception exception) {
+                                Toast.makeText(BenJerryActivityMenu.this,"Image Getting Error!",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        System.out.println(dish.getImageUrl());
+                        recViewAdapter = new RecyclerViewAdapter(getApplication(), dishList,images);
+                        benJerry.setAdapter(recViewAdapter);
+                        benJerry.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        System.out.println("Got her0e");
                     }
                 else
-                    System.out.println("Not geeting Query Right!");
-                Toast.makeText(BenJerryActivityMenu.this,"Dishes Getting!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(BenJerryActivityMenu.this,"Dishe Getting!",Toast.LENGTH_LONG).show();
 
             }
 
@@ -123,34 +126,21 @@ public class BenJerryActivityMenu extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RecyclerViewAdapter recViewAdapter = new RecyclerViewAdapter(this, _name, _description, _price, null);
+        benJerry.setAdapter(recViewAdapter);
+        benJerry.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-
-        for(Dish dish: dishList){
-            System.out.println(dish.getFalvor());
-            _name.add(dish.getFalvor());
-            _description.add(dish.getDescription());
-            FirebaseStorage.getInstance().getReference().child(dish.getImageUrl()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Bitmap bitmap = null;
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(BenJerryActivityMenu.this.getContentResolver(), uri);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    _images.add(bitmap);
-
-                    Toast.makeText(BenJerryActivityMenu.this,"Image Getting!",Toast.LENGTH_LONG).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(BenJerryActivityMenu.this,"Image Getting Error!",Toast.LENGTH_LONG).show();
-                }
-            });
-            _price.add(dish.getPrice());
-
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RecyclerViewAdapter recViewAdapter = new RecyclerViewAdapter(this, _name, _description, _price, null);
+        benJerry.setAdapter(recViewAdapter);
+        benJerry.setLayoutManager(new LinearLayoutManager(this));
     }
 
 

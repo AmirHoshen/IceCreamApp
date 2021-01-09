@@ -3,16 +3,24 @@ package userlogina.example.mylastapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +28,13 @@ import userlogina.example.mylastapplication.Orders.Dish;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>{
 
+    ArrayList<Dish> _dish = new ArrayList<>();
     ArrayList<String> _name = new ArrayList<>();
     ArrayList<String> _description = new ArrayList<>();
     ArrayList<Double> _price = new ArrayList<>();
-    ArrayList<Bitmap> _images = new ArrayList<>();
+    ArrayList<Uri> _images = new ArrayList<>();
     Context context;
+
 
     public RecyclerViewAdapter(Context ct, ArrayList s1, ArrayList s2,ArrayList s3, ArrayList img){
         context = ct;
@@ -34,7 +44,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         _images = img;
     }
 
-    public RecyclerViewAdapter(List<Dish> fetchDish) {
+    public RecyclerViewAdapter(Context ct,ArrayList<Dish> fetchDish,ArrayList<Uri> Uri) {
+        context = ct;
+        synchronized (this){for(Dish d:fetchDish){
+            _name.add(d.getFalvor());
+            _description.add(d.getDescription());
+            _price.add(d.getPrice());
+            FirebaseStorage.getInstance().getReference().child(d.getImageUrl()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public synchronized void onSuccess(Uri uri) {
+                    System.out.println("Image Got");
+                    _images.add(uri);
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public synchronized void onFailure(@NonNull Exception exception) {
+
+                }
+            });
+        }}
+
     }
 
     @NonNull
@@ -50,7 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.iceCreamTastes.setText(_name.get(position));
         holder.iceCreamDescription.setText(_description.get(position));
-        holder.myImageView.setImageBitmap(_images.get(position));
+        holder.myImageView.setImageURI(_images.get(position));
         holder.iceCreamPrice.setText(_price.get(position).toString());
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +98,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return _description.size();
+        return _name.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

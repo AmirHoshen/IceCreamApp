@@ -79,6 +79,8 @@ public class BusinessAddDishActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     addDish();
+                    startActivity(new Intent(BusinessAddDishActivity.this, BusinessArea.class));
+                    finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -156,7 +158,6 @@ public class BusinessAddDishActivity extends AppCompatActivity {
                 Toast.makeText(BusinessAddDishActivity.this,"Failed To Add Dish!",Toast.LENGTH_LONG).show();
             }
         });
-
     }
     private void uploadImage() {
         mStorageRef =  mStorageRef.child(path);
