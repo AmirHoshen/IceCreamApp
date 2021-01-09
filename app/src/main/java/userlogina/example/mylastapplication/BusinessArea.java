@@ -1,5 +1,6 @@
 package userlogina.example.mylastapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,6 +20,9 @@ public class BusinessArea extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
+    private FirebaseAuth firebaseAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,22 @@ public class BusinessArea extends AppCompatActivity {
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        if(firebaseAuth.getCurrentUser() == null){
+                            firebaseAuth.signOut();
+
+                        }
+                    }
+                };
+                startActivity(new Intent(BusinessArea.this, MainActivity.class));
+                finish();
+            }
+        });
 
 
     }
