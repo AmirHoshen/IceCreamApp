@@ -1,26 +1,19 @@
 package userlogina.example.mylastapplication;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.service.autofill.AutofillService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import userlogina.example.mylastapplication.Orders.Dish;
 import userlogina.example.mylastapplication.Orders.Upload;
 
 public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecyclerAdapter.ImageViewHolder> {
@@ -46,9 +39,11 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
     private Context context;
     private List<Upload> mUploads;
 
+
     public BusinessRecyclerAdapter(Context ct, List<Upload> uploads) {
         context = ct;
         mUploads = uploads;
+
     }
 
 
@@ -66,14 +61,13 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        Upload uploadCurrent = mUploads.get(position);
-        holder.name.setText(uploadCurrent.getTaste());
-        holder.description.setText("  " + uploadCurrent.getDescription());
-        holder.price.setText(uploadCurrent.getPrice()+"");
+        holder.name.setText(mUploads.get(position).getFalvor());
+        holder.description.setText(mUploads.get(position).getDescription());
+        holder.price.setText(" "+ mUploads.get(position).getPrice());
 
 //
         Picasso.with(context)
-                .load(uploadCurrent.getImageUrl())
+                .load(mUploads.get(position).getImageUrl())
                 .fit()
                 .centerCrop()
                 .into(holder.imgView);

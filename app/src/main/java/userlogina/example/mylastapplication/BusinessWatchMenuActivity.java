@@ -36,8 +36,7 @@ public class BusinessWatchMenuActivity extends AppCompatActivity {
     private DatabaseReference mRef;
     private List<Upload> mUpload;
     private List<String> taste;
-    private List<String> description;
-    private List<Double> price;
+
 
     private ImageView backPressBtn;
 

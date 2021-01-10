@@ -1,10 +1,12 @@
 package userlogina.example.mylastapplication.Orders;
 
 public class Upload {
-    private String taste;
+    private String falvor;
     private String Description;
     private double Price;
     private String ImageUrl;
+    private String Tag;
+
 
 
     public String getDescription() {
@@ -33,18 +35,18 @@ public class Upload {
             name = "No Name";
         }
 
-        taste = name;
+        falvor = name;
         Description = description;
         Price = price;
         ImageUrl = imageUrl;
     }
 
-    public String getTaste() {
-        return taste;
+    public String getFalvor() {
+        return falvor;
     }
 
-    public void setTaste(String name) {
-        taste = name;
+    public void setFalvor(String name) {
+        falvor = name;
     }
 
     public String getImageUrl() {
