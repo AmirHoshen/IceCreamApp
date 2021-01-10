@@ -59,10 +59,6 @@ public class BusinessRegMainActivity extends AppCompatActivity {
         databaseBusiness = FirebaseDatabase.getInstance().getReference().child("Business");
 //        progressBar.setVisibility(View.INVISIBLE);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null){
-            if(user.getUid().equals("sYIsZ3lypWPUvha61jTuJ2KTNzV2") || user.getUid().equals("sYIsZ33ypWPUvha61jTuJ2KTNzV2"))
-                startActivity(new Intent(BusinessRegMainActivity.this, BusinessArea.class));}
 
         registerBusiness.setOnClickListener(new View.OnClickListener() {
             @Override

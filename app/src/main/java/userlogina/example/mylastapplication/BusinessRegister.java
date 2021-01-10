@@ -34,13 +34,13 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
 
     private FirebaseAuth mAuth;
     private TextView banner, registerBusiness;
-    private String city;
-    private String UID;
-    private CheckBox iceCreamOwner_BJ, iceCreamOwner_golda;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     //   DatabaseReference myRef = database.getReference();
 
     private EditText editTextBusinessOwnFullName, editTextBusinessName,editTextEmail, editTextPhone, editTextPassword;
+    private String city;
+    private CheckBox iceCreamOwner_golda;
+    private CheckBox iceCreamOwner_BJ;
     public static ProgressBar progressBar3;
 
 
@@ -69,7 +69,6 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
         iceCreamOwner_golda = findViewById(R.id.checkBoxBusniessGolda);
         iceCreamOwner_BJ = findViewById(R.id.checkBoxBusniessBJ);
 
-        UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         iceCreamOwner_golda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,26 +115,20 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser() {
-        String businessOwnerFullName, businessName, email, phone ,location, password;
+        String businessOwnerFullName, businessName,email, phone, password;
+
         businessOwnerFullName = editTextBusinessOwnFullName.getText().toString().trim();
         businessName = editTextBusinessName.getText().toString().trim();
         email =  editTextEmail.getText().toString().trim();
         phone = editTextPhone.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
-        location = city;
         final String type;
         if (iceCreamOwner_golda.isChecked()) {
             type = "Golda";
         }
-        else {
+        else{
             type = "BJ";
         }
-        ArrayList<Order> orders = new ArrayList<Order>();
-        ArrayList<Dish> order = new ArrayList<Dish>();
-        order.add(new Dish("vanila","Tasty Shit",2,1));
-        order.add(new Dish("caramel","Goodies",15,2));
-        orders.add(new Order("1",businessName,"0000000000","makom 22/2", order,32.0,"ok","08/12/2020 21:42:01"));
-
 
         if(businessOwnerFullName.isEmpty()){
             editTextBusinessOwnFullName.setError("Full name is required!");
@@ -177,7 +170,7 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Business b = new Business(businessOwnerFullName, businessName, email, phone, location, type, password, UID, orders);
+                    Business b = new Business(businessOwnerFullName, businessName, email, phone, password, city, type);
 
                     //return the id for the registered user
                     FirebaseDatabase.getInstance().getReference("Business")
@@ -188,18 +181,17 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
 
                             if(task.isSuccessful()){
                                 Toast.makeText(BusinessRegister.this, "Business owner has been registered successfully", Toast.LENGTH_LONG).show();
-                                finish();
-
-                                startActivity(new Intent(BusinessRegister.this, BusinessArea.class));
+                                progressBar3.setVisibility(View.GONE);
                                 finish();
                             }else{
-                                Toast.makeText(BusinessRegister.this, "Failed to register1! Try again!", Toast.LENGTH_LONG).show();
-
+                                Toast.makeText(BusinessRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                progressBar3.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(BusinessRegister.this, "Failed to register2! Try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BusinessRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                    progressBar3.setVisibility(View.GONE);
                 }
             }
         });
@@ -213,7 +205,8 @@ public class BusinessRegister extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
+

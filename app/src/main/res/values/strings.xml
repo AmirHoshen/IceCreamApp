@@ -127,6 +127,24 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="click_to_edit">Click To Edit :</string>
+    <string name="business_name">Business Name: name</string>
+    <string name="business_owner_name">Business Owner Name: name</string>
+    <string name="email_name">Email: name</string>
+    <string name="city_name">City: name</string>
+    <string name="personal_settings">personal settings</string>
+    <string name="logout">Logout</string>
+    <string name="return_button">Return</string>
+    <string name="change">Change</string>
+    <string name="name">Name</string>
+    <string name="edit_location">Edit Location:</string>
+    <string name="button">Button</string>
+    <string name="settings">Settings</string>
+    <string name="new_busniess_name">new Busniess Name</string>
+    <string name="edit_busniess_name">Edit Busniess Name</string>
+    <string name="edit_password">Edit Password</string>
+    <string name="new_password">New Password</string>
+    <string name="current_password">Current Password</string>
 
 
 </resources>

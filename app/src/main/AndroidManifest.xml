@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLastApplication">
-        <activity android:name=".ListBusinessFilterActivity"></activity>
+        <activity android:name=".PersonalSettingsActivity"></activity>
         <activity
             android:name=".ListBusinessActivity"
             android:label="@string/title_activity_list_business"
