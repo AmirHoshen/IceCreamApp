@@ -1,7 +1,5 @@
 package userlogina.example.mylastapplication.Orders;
 
-import android.net.Uri;
-
 
 public class Dish {
     private String falvor;

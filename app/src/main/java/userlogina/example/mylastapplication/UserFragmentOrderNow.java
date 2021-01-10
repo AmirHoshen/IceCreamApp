@@ -1,5 +1,6 @@
 package userlogina.example.mylastapplication;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,7 +19,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class UserFragmentOrderNow extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    private DatabaseReference myRef;
+    private FirebaseUser user;
 
     private ImageButton bJBtn, goldaBtn;
     private Button moveToShoppingCartViewActivity;
@@ -43,6 +52,8 @@ public class UserFragmentOrderNow extends Fragment implements AdapterView.OnItem
         bJBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("BJ Shopping Cart").getRef();
                 startActivity(new Intent(getActivity(), BenJerryActivityMenu.class));
             }
         });
@@ -51,6 +62,9 @@ public class UserFragmentOrderNow extends Fragment implements AdapterView.OnItem
         goldaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("Golda Shopping Cart").getRef();
                 startActivity(new Intent(getActivity(), GoldaActivityMenu.class));
             }
         });

@@ -26,12 +26,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/businessOlderOrderRecycler"
-        android:layout_width="411dp"
-        android:layout_height="465dp"
-        android:layout_marginTop="126dp"
+        android:layout_width="365dp"
+        android:layout_height="532dp"
         android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toTopOf="@+id/busOlderOrderBackPressBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

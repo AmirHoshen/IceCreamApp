@@ -1,39 +1,27 @@
 package userlogina.example.mylastapplication;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import userlogina.example.mylastapplication.Orders.Dish;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 public class GoldaActivityMenu extends AppCompatActivity {
@@ -45,7 +33,7 @@ public class GoldaActivityMenu extends AppCompatActivity {
     ArrayList<String> _name = new ArrayList<>();
     ArrayList<String> _description = new ArrayList<>();
     ArrayList<Double> _price = new ArrayList<>();
-    ArrayList<Bitmap> _images = new ArrayList<>();
+    ArrayList<ImageView> _images = new ArrayList<ImageView>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +60,8 @@ public class GoldaActivityMenu extends AppCompatActivity {
         });
 
         //query to put info in s1,...,s3
-         //Query dishList = FirebaseDatabase.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").getRef();
+        //Query dishList = FirebaseDatabase.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").getRef();
         Collector();
-
 
 
         RecyclerViewAdapter recViewAdapter = new RecyclerViewAdapter(this, _name, _description, _price, null);
@@ -84,19 +71,20 @@ public class GoldaActivityMenu extends AppCompatActivity {
 
 
     }
-    public void Collector(){
+
+    public void Collector() {
         Query dishList = FirebaseDatabase.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").getRef();
         dishList.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                if (snapshot.exists())
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         System.out.println("Dish located!");
                         Dish d = dataSnapshot.getValue(Dish.class);
                         dishes.add(d);
                     }
                 else
-                    System.out.println("Not geeting Query Right!");
+                    System.out.println("Not getting Query Right!");
             }
 
             @Override
@@ -104,42 +92,20 @@ public class GoldaActivityMenu extends AppCompatActivity {
 
             }
         });
-        for (Dish d: dishes
-        ) {
-            _name.add(d.getFalvor());
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").child("imageUrl");
+        for (Dish d : dishes) {
+            _name.add(d.getFalvor().toString());
             _description.add(d.getDescription());
             _price.add(d.getPrice());
-            FirebaseStorage.getInstance().getReference().child(d.getImageUrl()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Bitmap bitmap = null;
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(GoldaActivityMenu.this.getContentResolver(), uri);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    _images.add(bitmap);
+            ImageView imgView = findViewById(R.id.myImageView);
+            _images.add(imgView);
+            Glide.with(this).load(storageReference).into(imgView);
+        }
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(GoldaActivityMenu.this,"Image Getting Error!",Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-    }
-    public Bitmap getBitmapFromURI(Uri uri){
-        String[] filePathColumn = {MediaStore.Images.Media.DATA};
-        Cursor cursor = GoldaActivityMenu.this.getContentResolver().query(uri, filePathColumn, null, null, null);
-        if(cursor!=null){
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            File f_image = new File(cursor.getString(columnIndex));
-            cursor.close();
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            return BitmapFactory.decodeFile(f_image.getAbsolutePath(), o2);
-        }
-        return null;
+        RecyclerViewAdapter recViewAdapter = new RecyclerViewAdapter(this, _name, _description, _price, _images);
+        goldaRecyclerView.setAdapter(recViewAdapter);
+        goldaRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
+

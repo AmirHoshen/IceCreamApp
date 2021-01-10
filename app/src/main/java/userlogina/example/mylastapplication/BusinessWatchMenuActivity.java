@@ -16,24 +16,29 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import userlogina.example.mylastapplication.Orders.Dish;
+import userlogina.example.mylastapplication.Orders.Upload;
 
 public class BusinessWatchMenuActivity extends AppCompatActivity {
 
 
-    RecyclerView menuRecyclerView;
+    private RecyclerView menuRecyclerView;
+    private BusinessRecyclerAdapter mAdapter;
 
-    ArrayList<Dish> dishes = new ArrayList<>();
-    ArrayList<String> _name = new ArrayList<>();
-    ArrayList<String> _description = new ArrayList<>();
-    ArrayList<Double> _price = new ArrayList<>();
-    ArrayList<Bitmap> _images = new ArrayList<>();
+    private DatabaseReference mRef;
+    private List<Upload> mUpload;
+    private List<String> taste;
+    private List<String> description;
+    private List<Double> price;
+
     private ImageView backPressBtn;
 
     @Override
@@ -51,40 +56,38 @@ public class BusinessWatchMenuActivity extends AppCompatActivity {
         });
 
         menuRecyclerView = findViewById(R.id.businessOlderOrderRecycler);
+
+
         Collector();
-        BusinessRecyclerAdapter recyclerViewAdapter = new BusinessRecyclerAdapter(this,_name, _description, _price);
+        BusinessRecyclerAdapter recyclerViewAdapter = new BusinessRecyclerAdapter(this, mUpload);
         menuRecyclerView.setAdapter(recyclerViewAdapter);
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void Collector() {
+
         String curUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Query dishList = FirebaseDatabase.getInstance().getReference("Business").child(curUser).child("Dishes").orderByKey();
-        dishList.addListenerForSingleValueEvent(new ValueEventListener() {
+        mUpload = new ArrayList<>();
+        mRef = FirebaseDatabase.getInstance().getReference("Business").child(curUser).child("Dishes");
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot snap: snapshot.getChildren()){
-                        Dish dish = snap.getValue(Dish.class);
-                        dishes.add(dish);
-                        _name.add(dish.getFalvor());
-                        _description.add(dish.getDescription());
-                        _price.add(dish.getPrice());
+                for (DataSnapshot sn: snapshot.getChildren()){
 
-                    }
-                    BusinessRecyclerAdapter recViewAdapter = new BusinessRecyclerAdapter(getApplicationContext(), _name, _description,_price);
-
-                    menuRecyclerView.setAdapter(recViewAdapter);
-                    menuRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                }else {
-                    Toast.makeText(getApplicationContext(), "No menu exists yet!", Toast.LENGTH_LONG).show();
+                    Upload upload = sn.getValue(Upload.class);
+                    mUpload.add(upload);
                 }
+
+                mAdapter = new BusinessRecyclerAdapter(BusinessWatchMenuActivity.this, mUpload);
+                menuRecyclerView.setAdapter(mAdapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(BusinessWatchMenuActivity.this, "Database ERROR", Toast.LENGTH_SHORT).show();
 
             }
         });
+
     }
 }

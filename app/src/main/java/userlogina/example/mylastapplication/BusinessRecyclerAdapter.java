@@ -7,6 +7,7 @@ import android.service.autofill.AutofillService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,76 +15,74 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import userlogina.example.mylastapplication.Orders.Dish;
+import userlogina.example.mylastapplication.Orders.Upload;
 
-public class BusinessRecyclerAdapter extends RecyclerView.Adapter<userlogina.example.mylastapplication.RecyclerViewAdapter.MyViewHolder> {
+public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecyclerAdapter.ImageViewHolder> {
 
-    ArrayList<String> _name = new ArrayList<>();
-    ArrayList<String> _description = new ArrayList<>();
-    ArrayList<Double> _price = new ArrayList<>();
-    Context context;
 
-    public BusinessRecyclerAdapter(Context ct, ArrayList s1, ArrayList s2, ArrayList s3) {
-        context = ct;
-        _name = s1;
-        _description = s2;
-        _price = s3;
+
+    public class ImageViewHolder extends RecyclerView.ViewHolder{
+        public TextView name;
+        public TextView description;
+        public TextView price;
+        public ImageView imgView;
+
+
+        public ImageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name = itemView.findViewById(R.id.iceCreamTastes);
+            description = itemView.findViewById(R.id.iceCreamDescription);
+            price = itemView.findViewById(R.id.IceCreamPrice);
+            imgView = itemView.findViewById(R.id.myImageView);
+        }
     }
 
-    public BusinessRecyclerAdapter(List<Dish> fetchDish) {
+    private Context context;
+    private List<Upload> mUploads;
+
+    public BusinessRecyclerAdapter(Context ct, List<Upload> uploads) {
+        context = ct;
+        mUploads = uploads;
+    }
+
+
+    public BusinessRecyclerAdapter() {
     }
 
     @NonNull
     @Override
-    public userlogina.example.mylastapplication.RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.my_row, parent, false);
 
-        return new userlogina.example.mylastapplication.RecyclerViewAdapter.MyViewHolder(view);
+        return new ImageViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull userlogina.example.mylastapplication.RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.iceCreamTastes.setText(_name.get(position));
-        holder.iceCreamDescription.setText(_description.get(position));
-        holder.iceCreamPrice.setText(_price.get(position).toString());
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+        Upload uploadCurrent = mUploads.get(position);
+        holder.name.setText(uploadCurrent.getTaste());
+        holder.description.setText("  " + uploadCurrent.getDescription());
+        holder.price.setText(uploadCurrent.getPrice()+"");
 
-        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SecondActivityOrderBenAndJerry.class);
-                intent.putExtra("name", _name.get(position));
-                intent.putExtra("description", _description.get(position));
-                intent.putExtra("price", _price.get(position));
-                context.startActivity(intent);
-            }
-        });
+//
+        Picasso.with(context)
+                .load(uploadCurrent.getImageUrl())
+                .fit()
+                .centerCrop()
+                .into(holder.imgView);
     }
 
     @Override
     public int getItemCount() {
-        return _description.size();
+        return mUploads.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-
-        TextView iceCreamTastes, iceCreamDescription, iceCreamPrice;
-        ImageView myImageView;
-        ConstraintLayout mainLayout;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            iceCreamTastes = itemView.findViewById(R.id.iceCreamTastes);
-            iceCreamDescription = itemView.findViewById(R.id.iceCreamDescription);
-            myImageView = itemView.findViewById(R.id.myImageView);
-            mainLayout = itemView.findViewById(R.id.mainLayout);
-            iceCreamPrice = itemView.findViewById(R.id.IceCreamPrice);
-
-        }
-    }
 }
 

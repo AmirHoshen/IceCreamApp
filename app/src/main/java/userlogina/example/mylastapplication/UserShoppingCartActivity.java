@@ -31,10 +31,6 @@ import userlogina.example.mylastapplication.Orders.Dish;
 public class UserShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView userShoppingCartRecyclerView;
-
-
-    private FirebaseDatabase database;
-    private FirebaseUser user;
     private DatabaseReference dbRef;
 
     HelperAdapter helperAdapter;
@@ -44,7 +40,7 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     private double dishPrices[];
     public static double totalPrice = 0.0;
 
-    List<Dish> fetchDish;
+    private List<Dish> fetchDish;
     public TextView totalPriceText;
     private EditText removeIndex;
     private Button orderButton, removeButton, removeCart;
@@ -62,7 +58,6 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         buildRecyclerView();
 
 
-
         userShoppingCartRecyclerView = findViewById(R.id.ShoppingCartRecyclerView);
         userShoppingCartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -76,8 +71,8 @@ public class UserShoppingCartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dbRef.removeValue();
                 totalPrice = 0.0;
-                totalPriceText.setText( ""+totalPrice);
-                for(int i=0; i<=fetchDish.size()-1; i++){
+                totalPriceText.setText("" + totalPrice);
+                for (int i = 0; i <= fetchDish.size() - 1; i++) {
                     removeItem(i);
                 }
 
@@ -94,9 +89,9 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (removeIndex.getText().toString().equals(null) || removeIndex.getText().toString().equals("")){
+                if (removeIndex.getText().toString().equals(null) || removeIndex.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Legal index value must be inserted!", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     int position = (Integer.parseInt(removeIndex.getText().toString()));
                     removeItem(position);
                 }
@@ -108,39 +103,9 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         backPressBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserShoppingCartActivity.this, BenJerryActivityMenu.class);
-                startActivity(intent);
                 finish();
             }
         });
-
-
-        fetchDish = new ArrayList<>();
-
-        dbRef = FirebaseDatabase.getInstance().getReference("Users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("ShoppingCart").getRef();
-
-        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds: snapshot.getChildren()){
-                    Dish dish = ds.getValue(Dish.class);
-                    totalPrice += dish.getPrice();
-                    fetchDish.add(dish);
-                }
-                String priceText = totalPrice +"";
-                helperAdapter = new HelperAdapter(fetchDish);
-                userShoppingCartRecyclerView.setAdapter(helperAdapter);
-                totalPriceText.setText(priceText);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
         //reference to user database shopping cart branch id
 
         //collecting information from all dishes to sum up the order and display it 4 user.
@@ -156,14 +121,19 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         //4.if data sent successfully push this data into this user new branch called OrderHistory
         // and empty this user shopping cart.
 
-       }
-    public void removeItem(int position){
-        if(position>fetchDish.size()-1){
-            Toast.makeText(getApplicationContext(),"Chosen position is illegal", Toast.LENGTH_SHORT).show();
-        }else{
-            if(position == 0 && fetchDish.size() == 0){
+    }
+
+    private void createExampleList() {
+
+    }
+
+    public void removeItem(int position) {
+        if (position > fetchDish.size() - 1) {
+            Toast.makeText(getApplicationContext(), "Chosen position is illegal", Toast.LENGTH_SHORT).show();
+        } else {
+            if (position == 0 && fetchDish.size() == 0) {
                 totalPrice = 0.0;
-            }else{
+            } else {
                 double itemRemovedPrice = fetchDish.get(position).getPrice();
                 Query que = dbRef.orderByChild("falvor").equalTo(fetchDish.get(position).getFalvor());
 
@@ -171,8 +141,8 @@ public class UserShoppingCartActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         snapshot.getChildren().iterator().next().getRef().removeValue();
-                        totalPrice -=  itemRemovedPrice;
-                        String priceText = ""+ (double)totalPrice;
+                        totalPrice -= itemRemovedPrice;
+                        String priceText = "" + (double) totalPrice;
                         totalPriceText.setText(priceText);
 
                     }
@@ -190,8 +160,29 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     }
 
     public void buildRecyclerView() {
-    }
-    public void createExampleList(){
+        fetchDish = new ArrayList<>();
 
+        dbRef = FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("ShoppingCart").getRef();
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Dish dish = ds.getValue(Dish.class);
+                    totalPrice += dish.getPrice();
+                    fetchDish.add(dish);
+                }
+                String priceText = totalPrice + "";
+                helperAdapter = new HelperAdapter(fetchDish);
+                userShoppingCartRecyclerView.setAdapter(helperAdapter);
+                totalPriceText.setText(priceText);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
