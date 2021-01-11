@@ -20,6 +20,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class PersonalSettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
+
+
+    public PersonalSettingsActivity() {
+    }
     private TextView TextViewPSOwnerName;
     private TextView TextViewPSBusinessEmail;
     private TextView TextViewPSBusinessEmailPassword;
@@ -50,15 +54,10 @@ public class PersonalSettingsActivity extends AppCompatActivity implements View.
     private EditText EditTextPopUpPasswordNew;
     private Button buttonPopUPasswordChange;
 
-    public PersonalSettingsActivity() {
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_settings);
-
 
         ref_business = FirebaseDatabase.getInstance().getReference("Business");
         TextViewPSOwnerName = findViewById(R.id.TextViewPSOwnerName);

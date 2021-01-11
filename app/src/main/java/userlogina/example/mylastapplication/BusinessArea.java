@@ -15,13 +15,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class BusinessArea extends AppCompatActivity {
 
-    private Button olderOrders, watchMenu, addDish, logout, buttonSettingBusiness;
+    private Button olderOrders, watchMenu, addDish, buttonSettingBusiness;
     private TextView backToMainBanner;
 
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
     private FirebaseAuth firebaseAuth;
-
 
 
     @Override
@@ -33,7 +32,6 @@ public class BusinessArea extends AppCompatActivity {
         olderOrders = findViewById(R.id.businessOlderOrders);
         watchMenu = findViewById(R.id.businessWatchMenu);
         addDish = findViewById(R.id.businessAddDish);
-        logout = findViewById(R.id.BusinessSignOutButton);
         buttonSettingBusiness = findViewById(R.id.buttonSettingBusiness);
 
         olderOrders.setOnClickListener(new View.OnClickListener() {
@@ -67,16 +65,5 @@ public class BusinessArea extends AppCompatActivity {
                 finish();
             }
         });
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(BusinessArea.this, MainActivity.class));
-                finish();
-            }
-        });
-
-
     }
 }
