@@ -1,5 +1,8 @@
 package userlogina.example.mylastapplication.Orders;
 
+import android.text.format.Time;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +12,18 @@ public class Order {
     private String customer_name;
     private String customer_phone;
     private Double total_Price;
-    private List<Dish> Dishes = new ArrayList<>();
+    private List<Upload> Dishes = new ArrayList<>();
     private String status_order;
     private String address;
     private String Date;
-    //private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
 
 
     public Order() {
     }
 
-    public Order(String order_ID, String customer_name, String customer_phone,String address, ArrayList<Dish> dishes,Double total_Price, String status_order, String Date) {
+    public Order(String order_ID, String customer_name, String customer_phone,String address, ArrayList<Upload> dishes,Double total_Price, String status_order, String Date) {
         this.order_ID = order_ID;
         this.customer_name = customer_name;
         this.customer_phone = customer_phone;
@@ -62,11 +66,11 @@ public class Order {
         this.total_Price = total_Price;
     }
 
-    public List<Dish> getDishes() {
+    public List<Upload> getDishes() {
         return Dishes;
     }
 
-    public void setDishes(List<Dish> dishes) {
+    public void setDishes(List<Upload> dishes) {
         this.Dishes = dishes;
     }
 
@@ -89,6 +93,10 @@ public class Order {
 
     public void setDate(String date) {
         this.Date = Date;
+    }
+
+    public void setDate(){
+        this.Date = formatter.format(Time.getCurrentTimezone());
     }
 
     public String getAddress() {

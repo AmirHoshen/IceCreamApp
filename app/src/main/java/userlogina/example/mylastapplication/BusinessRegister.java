@@ -2,8 +2,7 @@ package userlogina.example.mylastapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import userlogina.example.mylastapplication.Orders.Dish;
-import userlogina.example.mylastapplication.Orders.Order;
+//import userlogina.example.mylastapplication.Orders.Dish;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import static userlogina.example.mylastapplication.R.array.Cities;
 import static userlogina.example.mylastapplication.MainActivity.progressBar;
 import static userlogina.example.mylastapplication.BusinessRegMainActivity.progressBarBsns;

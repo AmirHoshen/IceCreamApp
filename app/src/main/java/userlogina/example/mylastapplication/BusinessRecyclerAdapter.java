@@ -1,13 +1,16 @@
 package userlogina.example.mylastapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -25,6 +28,7 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
         public TextView description;
         public TextView price;
         public ImageView imgView;
+        public ConstraintLayout mainLayout;
 
 
         public ImageViewHolder(@NonNull View itemView) {
@@ -33,6 +37,7 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
             description = itemView.findViewById(R.id.iceCreamDescription);
             price = itemView.findViewById(R.id.IceCreamPrice);
             imgView = itemView.findViewById(R.id.myImageView);
+            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }
 
@@ -65,12 +70,24 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
         holder.description.setText(mUploads.get(position).getDescription());
         holder.price.setText(" "+ mUploads.get(position).getPrice());
 
-//
         Picasso.with(context)
                 .load(mUploads.get(position).getImageUrl())
                 .fit()
                 .centerCrop()
                 .into(holder.imgView);
+        holder.imgView.setTag(mUploads.get(position).getImageUrl());
+        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SecondActivityOrderBenAndJerry.class);
+                intent.putExtra("name", mUploads.get(position).getFalvor());
+                intent.putExtra("description", mUploads.get(position).getDescription());
+                intent.putExtra("image", mUploads.get(position).getImageUrl());
+                intent.putExtra("price", mUploads.get(position).getPrice());
+                intent.putExtra("tag",mUploads.get(position).getTag());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

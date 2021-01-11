@@ -2,15 +2,12 @@ package userlogina.example.mylastapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,16 +16,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import userlogina.example.mylastapplication.Orders.Upload;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import userlogina.example.mylastapplication.Orders.Dish;
+//import userlogina.example.mylastapplication.Orders.Dish;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>{
 
-    ArrayList<Dish> _dish = new ArrayList<>();
+    ArrayList<Upload> _dish = new ArrayList<>();
     ArrayList<String> _name = new ArrayList<>();
     ArrayList<String> _description = new ArrayList<>();
     ArrayList<Double> _price = new ArrayList<>();
@@ -44,9 +40,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         _images = img;
     }
 
-    public RecyclerViewAdapter(Context ct,ArrayList<Dish> fetchDish,ArrayList<Uri> Uri) {
+    public RecyclerViewAdapter(Context ct,ArrayList<Upload> fetchDish,ArrayList<Uri> Uri) {
         context = ct;
-        synchronized (this){for(Dish d:fetchDish){
+        synchronized (this){for(Upload d:fetchDish){
             _name.add(d.getFalvor());
             _description.add(d.getDescription());
             _price.add(d.getPrice());

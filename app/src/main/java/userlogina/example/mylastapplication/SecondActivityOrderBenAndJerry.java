@@ -3,11 +3,10 @@ package userlogina.example.mylastapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +17,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
-import userlogina.example.mylastapplication.Orders.Dish;
+//import userlogina.example.mylastapplication.Orders.Dish;
+import userlogina.example.mylastapplication.Orders.Upload;
 
 public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
 
@@ -31,11 +32,14 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
+    private Context context;
 
     //EditText dishPrice;
     double _price;
     String dishTitle, dishDescription;
-    Bitmap image;
+    String image;
+    private String tag;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,7 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
         dbRef = database.getReference().child("Users").child(user.getUid()).child("ShoppingCart").getRef();
 
 
-        dbRef.push().setValue(new Dish(title.getText().toString(),description.getText().toString(),Double.parseDouble(price.getText().toString()),1)).addOnCompleteListener(new OnCompleteListener<Void>() {
+        dbRef.push().setValue(new Upload(title.getText().toString(),description.getText().toString(),Double.parseDouble(price.getText().toString()),image,image)).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -92,12 +96,13 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     }
 
     private void getData(){
-        if(getIntent().hasExtra("image") && getIntent().hasExtra("name") && getIntent().hasExtra("description") && getIntent().hasExtra("price") ){
+        if(getIntent().hasExtra("tag") && getIntent().hasExtra("image") && getIntent().hasExtra("name") && getIntent().hasExtra("description") && getIntent().hasExtra("price") ){
 
             dishTitle = getIntent().getStringExtra("name");
             dishDescription = getIntent().getStringExtra("description");
-            image =  getIntent().getParcelableExtra("image");
             _price = getIntent().getDoubleExtra("price",1);
+            image =  getIntent().getStringExtra("image");
+            tag = getIntent().getStringExtra("tag");
 
         }else{
             Toast.makeText(this, "No Data, please contact support",Toast.LENGTH_SHORT).show();
@@ -107,8 +112,12 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     private void setData(){
         title.setText(dishTitle);
         description.setText(dishDescription);
-        mainImageView.setImageBitmap(image);
+        mainImageView.setTag(tag);
+        Picasso.with(context)
+                .load(image)
+                .fit()
+                .centerCrop()
+                .into(mainImageView);
         price.setText(""+_price);
-
     }
 }

@@ -4,8 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import userlogina.example.mylastapplication.Orders.Upload;
 
-import userlogina.example.mylastapplication.Orders.Dish;
+//import userlogina.example.mylastapplication.Orders.Dish;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class GoldaActivityMenu extends AppCompatActivity {
     Button previousPageGoldaBtn, shoppingCartGolda;
     RecyclerView goldaRecyclerView;
 
-    ArrayList<Dish> dishes = new ArrayList<>();
+    ArrayList<Upload> dishes = new ArrayList<>();
     ArrayList<String> _name = new ArrayList<>();
     ArrayList<String> _description = new ArrayList<>();
     ArrayList<Double> _price = new ArrayList<>();
@@ -80,7 +81,7 @@ public class GoldaActivityMenu extends AppCompatActivity {
                 if (snapshot.exists())
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         System.out.println("Dish located!");
-                        Dish d = dataSnapshot.getValue(Dish.class);
+                        Upload d = dataSnapshot.getValue(Upload.class);
                         dishes.add(d);
                     }
                 else
@@ -94,7 +95,7 @@ public class GoldaActivityMenu extends AppCompatActivity {
         });
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").child("imageUrl");
-        for (Dish d : dishes) {
+        for (Upload d : dishes) {
             _name.add(d.getFalvor().toString());
             _description.add(d.getDescription());
             _price.add(d.getPrice());

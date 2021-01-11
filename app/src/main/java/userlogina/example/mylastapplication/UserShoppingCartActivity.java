@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,25 +25,23 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import userlogina.example.mylastapplication.Orders.Dish;
+import userlogina.example.mylastapplication.Orders.Order;
+import userlogina.example.mylastapplication.Orders.Upload;
 
 public class UserShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView userShoppingCartRecyclerView;
     private DatabaseReference dbRef;
 
-    HelperAdapter helperAdapter;
+    BusinessRecyclerAdapter helperAdapter;
 
-    private String dishTitle[];
-    private String dishDescription[];
-    private double dishPrices[];
     public static double totalPrice = 0.0;
 
-    private List<Dish> fetchDish;
-    public TextView totalPriceText;
+    private List<Upload> fetchDish;
+    public TextView totalPriceText,dishPrice;
     private EditText removeIndex;
     private Button orderButton, removeButton, removeCart;
-
+    private Order benOrder,goldaOrder;
     private ImageView backPressBtn;
 
 
@@ -54,13 +51,13 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_shopping_cart);
 
 
-        createExampleList();
+
         buildRecyclerView();
 
 
         userShoppingCartRecyclerView = findViewById(R.id.ShoppingCartRecyclerView);
         userShoppingCartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        dishPrice = findViewById(R.id.IceCreamPrice);
         totalPriceText = findViewById(R.id.totalOrderPrice);
         orderButton = findViewById(R.id.OrderButton);
         removeIndex = findViewById(R.id.editTextNumber);
@@ -82,7 +79,33 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                for(Upload up : fetchDish){
+                    if(up.getTag() == "BJN@gmail.com"){
+                        benOrder.getDishes().add(up);
+                    }else if(up.getTag() == "golda@gmail.com"){
+                        goldaOrder.getDishes().add(up);
+                    }
+                }
+                if(!benOrder.getDishes().isEmpty()) {
+                    benOrder.setDate();
+                    FirebaseDatabase.getInstance().getReference().child("Business").
+                            child("nFIRYcoyF7fAE9dXIQbhRKnyEC93").child("orders").getRef().push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                if(!goldaOrder.getDishes().isEmpty()) {
+                    goldaOrder.setDate();
+                    FirebaseDatabase.getInstance().getReference().child("Business").
+                            child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("orders").getRef().push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
         removeButton = findViewById(R.id.removeButton);
@@ -123,9 +146,6 @@ public class UserShoppingCartActivity extends AppCompatActivity {
 
     }
 
-    private void createExampleList() {
-
-    }
 
     public void removeItem(int position) {
         if (position > fetchDish.size() - 1) {
@@ -169,12 +189,12 @@ public class UserShoppingCartActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    Dish dish = ds.getValue(Dish.class);
+                    Upload dish = ds.getValue(Upload.class);
                     totalPrice += dish.getPrice();
                     fetchDish.add(dish);
                 }
                 String priceText = totalPrice + "";
-                helperAdapter = new HelperAdapter(fetchDish);
+                helperAdapter = new BusinessRecyclerAdapter(getApplicationContext(),fetchDish);
                 userShoppingCartRecyclerView.setAdapter(helperAdapter);
                 totalPriceText.setText(priceText);
             }
