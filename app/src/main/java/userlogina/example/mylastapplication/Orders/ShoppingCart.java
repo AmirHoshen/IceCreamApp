@@ -30,4 +30,12 @@ public class ShoppingCart {
     public void setNum_of_products(int num_of_products) {
         this.num_of_products = num_of_products;
     }
+
+    public double getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(double total_price) {
+        this.total_price = total_price;
+    }
 }

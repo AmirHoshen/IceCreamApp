@@ -46,13 +46,15 @@ public class UserFragmentProfile extends Fragment {
         name.setText("Full Name: "+_user);
         email.setText("Email: "+ user.getEmail());
 
-        FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Users").equalTo(user.getUid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    User _phone = snapshot.getValue(User.class);
+                    for(DataSnapshot snap : snapshot.getChildren()){
+                        User _phone = snap.getValue(User.class);
+                        phone.setText("Phone Number: " + _phone.getPhone());
+                    }
                     //_phone.setPhone("11111561"); for later use of change info
-                    phone.setText("Phone Number: " + _phone.getPhone());
 
                 }
             }

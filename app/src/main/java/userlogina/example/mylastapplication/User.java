@@ -1,10 +1,14 @@
 package userlogina.example.mylastapplication;
 
+import java.util.ArrayList;
+
+import userlogina.example.mylastapplication.Orders.Order;
 import userlogina.example.mylastapplication.Orders.ShoppingCart;
 
 public class User {
     public String fullName, email, phone , password;
     public ShoppingCart shoppingCart;
+    //private ArrayList<Order> Orders;
 
     public User(){}
 
@@ -14,6 +18,7 @@ public class User {
         this.phone = phone;
         this.password = password;
         this.shoppingCart = null;
+        //this.Orders = new ArrayList<>();
     }
 
     public String getFullName() {
@@ -55,4 +60,12 @@ public class User {
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
+
+//    public ArrayList<Order> getOrders() {
+//        return Orders;
+//    }
+//
+//    public void setOrders(ArrayList<Order> orders) {
+//        Orders = orders;
+//    }
 }

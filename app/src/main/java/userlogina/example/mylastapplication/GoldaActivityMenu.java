@@ -13,10 +13,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -24,11 +26,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GoldaActivityMenu extends AppCompatActivity {
 
     Button previousPageGoldaBtn, shoppingCartGolda;
     RecyclerView goldaRecyclerView;
+    private DatabaseReference mRef;
+    private List<Upload> mUpload = new ArrayList<>();
+    BusinessRecyclerAdapter recViewAdapter;
+
 
     ArrayList<Upload> dishes = new ArrayList<>();
     ArrayList<String> _name = new ArrayList<>();
@@ -62,49 +69,49 @@ public class GoldaActivityMenu extends AppCompatActivity {
 
         //query to put info in s1,...,s3
         //Query dishList = FirebaseDatabase.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").getRef();
+        goldaRecyclerView = findViewById(R.id.recyclerViewGolda);
         Collector();
-
-
-        RecyclerViewAdapter recViewAdapter = new RecyclerViewAdapter(this, _name, _description, _price, null);
-
-        goldaRecyclerView.setAdapter(recViewAdapter);
+        BusinessRecyclerAdapter recyclerViewAdapter = new BusinessRecyclerAdapter(this, mUpload);
+        goldaRecyclerView.setAdapter(recyclerViewAdapter);
         goldaRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
     }
 
     public void Collector() {
-        Query dishList = FirebaseDatabase.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").getRef();
-        dishList.addValueEventListener(new ValueEventListener() {
+        mRef = FirebaseDatabase.getInstance().getReference().child("Business").
+                child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").getRef();
+
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        System.out.println("Dish located!");
-                        Upload d = dataSnapshot.getValue(Upload.class);
-                        dishes.add(d);
-                    }
-                else
-                    System.out.println("Not getting Query Right!");
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    Upload up = snap.getValue(Upload.class);
+                    mUpload.add(up);
+                }
+                recViewAdapter = new BusinessRecyclerAdapter(GoldaActivityMenu.this, mUpload);
+                goldaRecyclerView.setAdapter(recViewAdapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(GoldaActivityMenu.this, "Database ERROR", Toast.LENGTH_SHORT).show();
             }
         });
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Business").child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Dishes").child("imageUrl");
-        for (Upload d : dishes) {
-            _name.add(d.getFalvor().toString());
-            _description.add(d.getDescription());
-            _price.add(d.getPrice());
-            ImageView imgView = findViewById(R.id.myImageView);
-            _images.add(imgView);
-            Glide.with(this).load(storageReference).into(imgView);
-        }
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        BusinessRecyclerAdapter recViewAdapter = new BusinessRecyclerAdapter(this, mUpload);
+        goldaRecyclerView.setAdapter(recViewAdapter);
+        goldaRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        RecyclerViewAdapter recViewAdapter = new RecyclerViewAdapter(this, _name, _description, _price, _images);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BusinessRecyclerAdapter recViewAdapter = new BusinessRecyclerAdapter(this, mUpload);
         goldaRecyclerView.setAdapter(recViewAdapter);
         goldaRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

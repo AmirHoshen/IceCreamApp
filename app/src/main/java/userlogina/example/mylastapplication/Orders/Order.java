@@ -4,6 +4,7 @@ import android.text.format.Time;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -23,7 +24,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String order_ID, String customer_name, String customer_phone,String address, ArrayList<Upload> dishes,Double total_Price, String status_order, String Date) {
+    public Order(String order_ID, String customer_name, String customer_phone,String address, ArrayList<Upload> dishes,Double total_Price, String status_order) {
         this.order_ID = order_ID;
         this.customer_name = customer_name;
         this.customer_phone = customer_phone;
@@ -31,7 +32,6 @@ public class Order {
         this.Dishes = dishes;
         this.total_Price = total_Price;
         this.status_order = status_order;
-        this.Date = Date;
     }
 
     public String getOrderID() {
@@ -96,7 +96,7 @@ public class Order {
     }
 
     public void setDate(){
-        this.Date = formatter.format(Time.getCurrentTimezone());
+        this.Date = formatter.format(new Date());
     }
 
     public String getAddress() {

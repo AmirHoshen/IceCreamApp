@@ -20,6 +20,7 @@ public class Business {
         this.password = password;
         this.location = location;
         this.type = type;
+        this.Orders = new ArrayList<>();
     }
 
     public String getLocation() {

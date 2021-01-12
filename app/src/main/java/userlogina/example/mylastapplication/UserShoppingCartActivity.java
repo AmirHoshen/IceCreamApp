@@ -1,10 +1,17 @@
 package userlogina.example.mylastapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,9 +49,13 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     public TextView totalPriceText,dishPrice;
     private EditText removeIndex;
     private Button orderButton, removeButton, removeCart;
-    private Order benOrder,goldaOrder;
+    private Order benOrder,goldaOrder,userOrder;
     private ImageView backPressBtn;
-
+    private DatabaseReference dbRefBen;
+    private DatabaseReference dbRefGolda;
+    private static boolean BFlag = false;
+    private static boolean GFlag = false;
+    private DatabaseReference dbRefUser;
 
 
     @Override
@@ -78,10 +90,17 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         });
 
         orderButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                benOrder = new Order();
+                goldaOrder = new Order();
+                userOrder = new Order();
+                userOrder.setDate();
                 for(Upload up : fetchDish){
-                    if(up.getTag().equals("BJN@gmail.com")){
+                        userOrder.getDishes().add(up);
+                    //if(up.getTag().equals("bjn@gmail.com")){
+                    if(up.getTag().equals("mot@gmail.com")){
                         benOrder.getDishes().add(up);
                     }else if(up.getTag().equals("golda@gmail.com")){
                         goldaOrder.getDishes().add(up);
@@ -89,27 +108,60 @@ public class UserShoppingCartActivity extends AppCompatActivity {
                 }
                 if(!benOrder.getDishes().isEmpty()) {
                     benOrder.setDate();
-                    dbRef = FirebaseDatabase.getInstance().getReference().child("Business").
-                            child("nFIRYcoyF7fAE9dXIQbhRKnyEC93").child("orders").getRef();
-                    dbRef.push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    benOrder.setStatus("In progress");
+                    dbRefBen = FirebaseDatabase.getInstance().getReference().child("Business").child("8BNDK7H7taPpWpbQPmywdGn395G2").child("Orders").getRef();
+                            //child("hezz5qgKXDgnRiL6vEG2ZU0vJ6x1").child("Orders").getRef();
+                    dbRefBen.push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
 
                                 @Override
                         public void onSuccess(Void aVoid) {
+                            BFlag = true;
                             Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order from Ben&Jerry's!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            BFlag = false;
                         }
                     });
                 }
                 if(!goldaOrder.getDishes().isEmpty()) {
                     goldaOrder.setDate();
-                    dbRef = FirebaseDatabase.getInstance().getReference().child("Business").
-                            child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("orders").getRef();
-                    dbRef.push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    dbRefGolda = FirebaseDatabase.getInstance().getReference().child("Business").
+                            child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Orders").getRef();
+                    dbRefGolda.push().setValue(goldaOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            GFlag = true;
                             Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order from Golda!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            GFlag = false;
                         }
                     });
                 }
+                dbRefUser = FirebaseDatabase.getInstance().getReference().child("Users").
+                        child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Orders").getRef();
+                dbRefUser.push().setValue(userOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        notificationOnComplete();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+                totalPrice = 0.0;
+                totalPriceText.setText("" + totalPrice);
+                for (int i = 0; i <= fetchDish.size() - 1; i++) {
+                    removeItem(i);
+                }
+                dbRef.removeValue();
+                startActivity(new Intent(UserShoppingCartActivity.this,UserLandPageMainActivity.class));
+                finish();
             }
         });
         removeButton = findViewById(R.id.removeButton);
@@ -164,11 +216,12 @@ public class UserShoppingCartActivity extends AppCompatActivity {
                 que.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        snapshot.getChildren().iterator().next().getRef().removeValue();
-                        totalPrice -= itemRemovedPrice;
-                        String priceText = "" + (double) totalPrice;
-                        totalPriceText.setText(priceText);
-
+                        if(snapshot.exists()) {
+                            snapshot.getChildren().iterator().next().getRef().removeValue();
+                            totalPrice -= itemRemovedPrice;
+                            String priceText = "" + (double) totalPrice;
+                            totalPriceText.setText(priceText);
+                        }
                     }
 
                     @Override
@@ -208,5 +261,24 @@ public class UserShoppingCartActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void notificationOnComplete(){
+        if(BFlag == true || GFlag == true ){
+            NotificationChannel mChannel = new NotificationChannel("GlidaLee_1", "GlidaLee", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(UserShoppingCartActivity.this,"GlidaLee_1")
+                    .setContentTitle("GlidaLee")
+                    .setContentText("Order Has Been Set")
+                    .setSmallIcon(R.drawable.b_jlogo)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setChannelId("GlidaLee_1");
+            builder.build();
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.createNotificationChannel(mChannel);
+            mNotificationManager.notify(001,builder.build());
+        }else if(BFlag == false && GFlag == false){
+            Toast.makeText(UserShoppingCartActivity.this,"Order Failed !",Toast.LENGTH_SHORT).show();
+        }
     }
 }

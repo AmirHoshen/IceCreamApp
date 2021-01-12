@@ -6,6 +6,7 @@ public class Upload {
     private double Price;
     private String ImageUrl;
     private String Tag;
+    private int amount;
 
     public Upload() {
         //empty constructor needed
@@ -21,6 +22,7 @@ public class Upload {
         Price = price;
         ImageUrl = imageUrl;
         Tag = tag;
+        this.amount = 1;
     }
 
     public String getFalvor() {
@@ -29,6 +31,22 @@ public class Upload {
 
     public void setFalvor(String falvor) {
         this.falvor = falvor;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public double getPrice() {
+        return Price;
+    }
+
+    public void setPrice(double price) {
+        Price = price;
     }
 
     public String getImageUrl() {
@@ -47,19 +65,11 @@ public class Upload {
         Tag = tag;
     }
 
-    public String getDescription() {
-        return Description;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public double getPrice() {
-        return Price;
-    }
-
-    public void setPrice(double price) {
-        Price = price;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }
