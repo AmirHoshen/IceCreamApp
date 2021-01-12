@@ -29,6 +29,9 @@ import static userlogina.example.mylastapplication.MainActivity.progressBar;
 
 public class UserRegMainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private DatabaseReference userShopCartBenJerry;
+    private DatabaseReference userShopCartGolda;
     private DatabaseReference databaseCustomer;
     TextView registerNewUser, forgotPassword , backToMainBanner;
     EditText editTextEmail, editTextPassword;
@@ -41,8 +44,11 @@ public class UserRegMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_reg_main);
 
         mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
         databaseCustomer = FirebaseDatabase.getInstance().getReference().child("Users");
+        userShopCartBenJerry = FirebaseDatabase.getInstance().getReference().child("Shopping Cart Ben&Jerry's");
+        userShopCartGolda = FirebaseDatabase.getInstance().getReference().child("Shopping Cart Golda");
 
         registerNewUser = (TextView) findViewById(R.id.textViewRegisterUser);
 

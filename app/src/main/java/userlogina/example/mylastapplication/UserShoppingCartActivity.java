@@ -45,6 +45,7 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     private ImageView backPressBtn;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,29 +81,32 @@ public class UserShoppingCartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 for(Upload up : fetchDish){
-                    if(up.getTag() == "BJN@gmail.com"){
+                    if(up.getTag().equals("BJN@gmail.com")){
                         benOrder.getDishes().add(up);
-                    }else if(up.getTag() == "golda@gmail.com"){
+                    }else if(up.getTag().equals("golda@gmail.com")){
                         goldaOrder.getDishes().add(up);
                     }
                 }
                 if(!benOrder.getDishes().isEmpty()) {
                     benOrder.setDate();
-                    FirebaseDatabase.getInstance().getReference().child("Business").
-                            child("nFIRYcoyF7fAE9dXIQbhRKnyEC93").child("orders").getRef().push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
+                    dbRef = FirebaseDatabase.getInstance().getReference().child("Business").
+                            child("nFIRYcoyF7fAE9dXIQbhRKnyEC93").child("orders").getRef();
+                    dbRef.push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                                @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order from Ben&Jerry's!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
                 if(!goldaOrder.getDishes().isEmpty()) {
                     goldaOrder.setDate();
-                    FirebaseDatabase.getInstance().getReference().child("Business").
-                            child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("orders").getRef().push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    dbRef = FirebaseDatabase.getInstance().getReference().child("Business").
+                            child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("orders").getRef();
+                    dbRef.push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserShoppingCartActivity.this, "Successfully Added Order from Golda!\nStatus is On prepare", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

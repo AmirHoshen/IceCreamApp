@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //starts a new intent activity.
+                mAuth = FirebaseAuth.getInstance();
                 if (!wasUser && !notExist) {
                     progressBar.setVisibility(View.VISIBLE);
                     startActivity(new Intent(MainActivity.this, BusinessArea.class));

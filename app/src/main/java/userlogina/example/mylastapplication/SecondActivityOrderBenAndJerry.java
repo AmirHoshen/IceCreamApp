@@ -77,8 +77,14 @@ public class SecondActivityOrderBenAndJerry extends AppCompatActivity {
     private void addToCart() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference().child("Users").child(user.getUid()).child("ShoppingCart").getRef();
 
+        if(tag == null){
+            Toast.makeText(getApplicationContext(), "Please contact support!", Toast.LENGTH_SHORT).show();
+        }else if(tag.equals("BJN@gmail.com")){
+            dbRef = database.getReference().child("Users").child(user.getUid()).child("Shopping Cart Ben&Jerry's").getRef();
+        }else if(tag.equals("golda@gmail.com")){
+            dbRef = database.getReference().child("Users").child(user.getUid()).child("Shopping Cart Golda").getRef();
+        }
 
         dbRef.push().setValue(new Upload(title.getText().toString(),description.getText().toString(),Double.parseDouble(price.getText().toString()),image,image)).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
