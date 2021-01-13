@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".BusinessOlderOrdersActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_oab_orderlist"
+            android:textSize="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            app:backgroundTint="#DD4D7E"
+            android:text="Orders Page"/>
+
+
+        <ListView
+            android:id="@+id/list_oab_activeiorder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </ListView>
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/busOlderOrderBackPressBtn"
         android:layout_width="0dp"
@@ -24,14 +47,5 @@
         app:layout_constraintTop_toBottomOf="@+id/OrderButton"
         app:srcCompat="@drawable/abc_vector_test" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/businessOlderOrderRecycler"
-        android:layout_width="411dp"
-        android:layout_height="465dp"
-        android:layout_marginTop="126dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/busOlderOrderBackPressBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
