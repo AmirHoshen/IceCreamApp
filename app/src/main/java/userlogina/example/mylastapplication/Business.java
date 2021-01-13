@@ -8,7 +8,7 @@ import userlogina.example.mylastapplication.Orders.Order;
 public class Business {
 
     String businessOwnerName, businessName, email, phone, password, location, type;
-    ArrayList<Order> Orders;
+    //ArrayList<Order> Orders;
 
     public Business(){}
 
@@ -20,7 +20,7 @@ public class Business {
         this.password = password;
         this.location = location;
         this.type = type;
-        this.Orders = new ArrayList<>();
+        //this.Orders = new ArrayList<>();
     }
 
     public String getLocation() {
@@ -79,11 +79,11 @@ public class Business {
         this.password = password;
     }
 
-    public ArrayList<Order> getOrders() {
-        return Orders;
-    }
-
-    public void setOrders(ArrayList<Order> orders) {
-        Orders = orders;
-    }
+//    public ArrayList<Order> getOrders() {
+//        return Orders;
+//    }
+//
+//    public void setOrders(ArrayList<Order> orders) {
+//        Orders = orders;
+//    }
 }

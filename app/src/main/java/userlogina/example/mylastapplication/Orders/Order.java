@@ -22,9 +22,16 @@ public class Order {
 
 
     public Order() {
+        this.total_Price = 0.0;
     }
 
-    public Order(String order_ID, String customer_name, String customer_phone,String address, ArrayList<Upload> dishes,Double total_Price, String status_order) {
+    public Order(String order_ID, String customer_name) {
+        this.order_ID = order_ID;
+        this.customer_name = customer_name;
+        this.total_Price = 0.0;
+    }
+
+    public Order(String order_ID, String customer_name, String customer_phone, String address, ArrayList<Upload> dishes, Double total_Price, String status_order) {
         this.order_ID = order_ID;
         this.customer_name = customer_name;
         this.customer_phone = customer_phone;
@@ -63,7 +70,7 @@ public class Order {
     }
 
     public void setPrice(Double price) {
-        this.total_Price = total_Price;
+        this.total_Price = price;
     }
 
     public List<Upload> getDishes() {

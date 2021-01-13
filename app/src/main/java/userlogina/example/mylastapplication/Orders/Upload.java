@@ -46,7 +46,7 @@ public class Upload {
     }
 
     public void setPrice(double price) {
-        Price = price;
+        this.Price = price;
     }
 
     public String getImageUrl() {

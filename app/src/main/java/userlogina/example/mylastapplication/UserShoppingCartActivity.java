@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import userlogina.example.mylastapplication.Orders.Order;
 import userlogina.example.mylastapplication.Orders.Upload;
@@ -56,6 +58,8 @@ public class UserShoppingCartActivity extends AppCompatActivity {
     private static boolean BFlag = false;
     private static boolean GFlag = false;
     private DatabaseReference dbRefUser;
+    private FirebaseUser _user;
+    private String orderId = UUID.randomUUID().toString();
 
 
     @Override
@@ -75,6 +79,7 @@ public class UserShoppingCartActivity extends AppCompatActivity {
         orderButton = findViewById(R.id.OrderButton);
         removeIndex = findViewById(R.id.editTextNumber);
         removeCart = findViewById(R.id.deleteCart);
+        _user = FirebaseAuth.getInstance().getCurrentUser();
 
         removeCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,23 +98,30 @@ public class UserShoppingCartActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                benOrder = new Order();
-                goldaOrder = new Order();
-                userOrder = new Order();
+                benOrder = new Order(orderId,_user.getDisplayName());
+                goldaOrder = new Order(orderId,_user.getDisplayName());
+                userOrder = new Order(orderId,_user.getDisplayName());
                 userOrder.setDate();
+                double benP = 0,goldP = 0,userP = 0;
                 for(Upload up : fetchDish){
                         userOrder.getDishes().add(up);
+                        userP += up.getPrice();
                     //if(up.getTag().equals("bjn@gmail.com")){
-                    if(up.getTag().equals("mot@gmail.com")){
+                    if(up.getTag().equals("benj@gmail.com")){
                         benOrder.getDishes().add(up);
+                        benP += up.getPrice();
                     }else if(up.getTag().equals("golda@gmail.com")){
                         goldaOrder.getDishes().add(up);
+                        goldP += up.getPrice();
                     }
                 }
+                userOrder.setPrice(userP);
+                System.out.println(userP+"");
                 if(!benOrder.getDishes().isEmpty()) {
                     benOrder.setDate();
+                    benOrder.setPrice(benP);
                     benOrder.setStatus("In progress");
-                    dbRefBen = FirebaseDatabase.getInstance().getReference().child("Business").child("8BNDK7H7taPpWpbQPmywdGn395G2").child("Orders").getRef();
+                    dbRefBen = FirebaseDatabase.getInstance().getReference().child("Business").child("PkpX9PUoxCedV1ancpAqJK9ADV42").child("Orders").getRef();
                             //child("hezz5qgKXDgnRiL6vEG2ZU0vJ6x1").child("Orders").getRef();
                     dbRefBen.push().setValue(benOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
 
@@ -127,8 +139,9 @@ public class UserShoppingCartActivity extends AppCompatActivity {
                 }
                 if(!goldaOrder.getDishes().isEmpty()) {
                     goldaOrder.setDate();
+                    goldaOrder.setPrice(goldP);
                     dbRefGolda = FirebaseDatabase.getInstance().getReference().child("Business").
-                            child("OZz7TYO50lQdvGUTkTaXJemSjro2").child("Orders").getRef();
+                            child("aJleapK2wIVYFgW5JbPL9gxRISN2").child("Orders").getRef();
                     dbRefGolda.push().setValue(goldaOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
