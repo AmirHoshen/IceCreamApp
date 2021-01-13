@@ -26,16 +26,14 @@ public class BusinessOlderOrdersActivity extends AppCompatActivity {
 
     private ImageView backPress;
     //xml
-    private TextView ordertext;
+    private TextView textView_oab_orderlist;
     private ListView listView_orderslist;
-    private Button button_done;
     //database
     private ArrayList<String> ordersList_string = new ArrayList<>();
     private ArrayAdapter<String> ordersList_adapter;
     private String rest_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    private DatabaseReference rest_reference = FirebaseDatabase.getInstance().getReference("Business");
-    private DatabaseReference order_ref = FirebaseDatabase.getInstance().getReference("Business");
-    private DatabaseReference user_order_ref = FirebaseDatabase.getInstance().getReference("Users");
+    private DatabaseReference rest_reference = FirebaseDatabase.getInstance().getReference("Users");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class BusinessOlderOrdersActivity extends AppCompatActivity {
         });
 
         listView_orderslist = findViewById(R.id.list_oab_activeiorder);
-        ordertext = findViewById(R.id.textView_oab_orderlist);
+        textView_oab_orderlist = findViewById(R.id.textView_oab_orderlist);
         rest_reference.child(rest_id).child("Orders").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
