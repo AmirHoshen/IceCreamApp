@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/picture1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserRegMainActivity">
@@ -14,16 +15,16 @@
         android:layout_marginLeft="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:fontFamily="@font/alex_brush"
         android:text="@string/app_name_on_screen"
         android:textColor="@color/black"
+        android:fontFamily="cursive"
         android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.11 " />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
@@ -95,10 +96,8 @@
         android:id="@+id/forgotPasswordBtnUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/abril_fatface"
         android:text="@string/forgot_your_password"
-        android:textAppearance="@style/TextAppearance.Compat.Notification.Info.Media"
-        android:textColor="@color/black"
+        android:textColor="#2196F3"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -133,7 +132,6 @@
         android:id="@+id/textViewRegisterUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/abril_fatface"
         android:text="@string/registerUserTxt"
         android:textColor="@color/black"
         android:textSize="20sp"

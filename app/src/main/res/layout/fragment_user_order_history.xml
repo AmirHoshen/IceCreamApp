@@ -17,9 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/alex_brush"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:text="@string/orderHistory"
 
-            android:textSize="40sp" />
+            android:textSize="30sp" />
 
         <ListView
             android:id="@+id/list_oab_activeiorder"

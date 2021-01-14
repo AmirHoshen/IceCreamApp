@@ -32,7 +32,7 @@ public class BusinessOlderOrdersActivity extends AppCompatActivity {
     private ArrayList<String> ordersList_string = new ArrayList<>();
     private ArrayAdapter<String> ordersList_adapter;
     private String rest_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    private DatabaseReference rest_reference = FirebaseDatabase.getInstance().getReference("Users");
+    private DatabaseReference rest_reference = FirebaseDatabase.getInstance().getReference("Business");
 
 
     @Override
